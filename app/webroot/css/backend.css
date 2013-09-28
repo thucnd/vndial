@@ -1,0 +1,11 @@
+#footer {
+    border: 1px solid #ccc;
+    background: #f0f0f0;
+    height:20px;   /* Height of the footer */
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom:  10px;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}

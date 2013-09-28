@@ -1,0 +1,87 @@
+#header-box  { border: 1px solid #ccc; background: #f0f0f0; }
+#header-box{
+    padding-left:25px;
+    height:30px;
+    background: -moz-linear-gradient(top, #FFF, #CCC);
+    background: -webkit-gradient(linear, center bottom, center top, from(#CCC), to(#FFF)); 
+}
+
+.folder
+{
+    float:left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5x;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: 10px;
+    width: 150px;
+    height: 110px;
+    border: 1px #cccccc solid;
+}
+
+div#element-box.folder:hover {
+    background: whitesmoke;
+    cursor: pointer;
+}
+
+div#element-box.folder{
+    border:1px solid #CCC;
+    background: -moz-linear-gradient(top, #FFF, #CCC);
+    background: -webkit-gradient(linear, center bottom, center top, from(#CCC), to(#FFF));
+    -moz-box-shadow: 1px  1px 2px #999;
+    -webkit-box-shadow: 1px  1px 2px #999;
+/*    box-shadow: 1px  1px 2px #999;*/
+}
+
+.foder-picture {
+    display: block;
+    text-align: center;
+    padding: 20px 20px 0px 20px;
+}
+
+
+.folder-tittle {
+    color: #666666;
+    display: block;
+    text-align: center;
+}
+
+.folder-tool {
+    display: block;
+    position: relative;
+    top: -1px;
+    left: -1px;
+}
+
+.folder-box {
+    border: 0px solid #D4D4D4;
+}
+
+
+/*-----------Top Menu-------------*/
+.navbar {
+    margin-bottom: 0;
+}
+
+.navbar .nav > li > a {
+    height: 30px;
+    line-height: 30px;
+
+}
+
+.navbar .nav .dropdown-toggle .caret {
+    margin-top: 13px;
+}
+
+.breadcrumb  {
+    border-bottom: 1px solid #E5E5E5;
+    margin: 0;
+}
+
+.navbar .brand {
+    padding: 0px 0px;
+}
+
+.navbar-inner {
+    border-bottom: 3px solid blue;
+}
