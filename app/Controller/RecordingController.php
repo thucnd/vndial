@@ -82,7 +82,7 @@ class RecordingController extends AppController {
         $ret = false;
         $errors = array();
         try {
-            $allowedExts = array("audio/mpeg", "audio/x-wav");
+            $allowedExts = array("audio/mpeg", "audio/x-wav", "audio/wav");
             if (isset($this->request->data)) {
                 if ($_FILES["audio_path"]["error"] > 0) {
                     array_push($errors, __('upload error'));
