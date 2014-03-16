@@ -10,12 +10,13 @@
 
         echo $this->Html->css(array(
             'backend',
-            'flexigrid',
+        //   'flexigrid',
             'bootstrap',
             'bootstrap-responsive',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
-            'google-code-prettify/prettify'
+            'google-code-prettify/prettify',
+            'table'
         ));
 
         for ($i = 0; $i < count($csss); $i++):
@@ -24,7 +25,7 @@
 
         echo $this->Html->script(array(
             'jquery-1.7.2.min',
-            'flexigrid',
+          //  'flexigrid',
             'common',
             'bootstrap-transition',
             'bootstrap-alert',
@@ -40,7 +41,10 @@
             'bootstrap-typeahead',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
-            'google-code-prettify/prettify'
+           // 'google-code-prettify/prettify',
+            'bootstrap-paginator',
+            'bTable',
+            'colResizable-1.3.min'
         ));
 
         for ($i = 0; $i < count($javascripts); $i++):
@@ -62,8 +66,6 @@
      
         <script src="/themes/js/w8-elements.min.js"></script>
         <script src="/themes/js/w8.min.js"></script>
-        
-        <script src="/themes/js/jquery.dataTables.min.js"></script>
       
     </head>
     <body>

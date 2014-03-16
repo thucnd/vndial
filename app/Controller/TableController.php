@@ -37,6 +37,8 @@ class TableController extends AppController {
     public $name = 'table';
     public $uses = null;
     public $javascripts = null;
+    public $uses = array('Survey', 'Recording', 'Response');
+    public $components = array('DataTableLogic', 'AppLogic', 'Session');
     
     function beforeFilter() {
         //$this->Auth->requireNoAuth('index', 'backoffice_index');
@@ -47,5 +49,32 @@ class TableController extends AppController {
     }
     
     public function index() {
+    }
+    
+     /**
+     * Process data table
+     */
+    public function process() {
+        $this->layout = false;
+        $jsonData = $this->DataTableLogic->processDataTable(
+                $this->request->data, $this->Survey, $this->columns);
+
+        $this->set(compact('jsonData'));
+    }
+
+    /**
+     * List of key-value to be displayed in gateway controller
+     * @return array
+     */
+    private function _getSurveyString() {
+        return array(
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 10, 'align' => LEFT_ALIGNMENT),
+            'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
+            'question' => array('name' => __('Question'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
+            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
+            'recording_id' => array('name' => __('Recording'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
+            'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT)
+        );
     }
 }

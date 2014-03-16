@@ -12,7 +12,7 @@ class CampaignLogicComponent extends Component {
     public $components = array('RequestHandler', 'Session');
     public $_campaignModel;
 
-    function startup(& $controller) {
+    function __construct() {
         App::import('Model', 'Campaign');
         $this->_campaignModel = new Campaign;
     }

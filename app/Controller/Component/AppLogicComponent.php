@@ -20,14 +20,6 @@ class AppLogicComponent extends Component {
     const _ONLY_ONE_ = 1;
 
     /**
-     * Initialze component
-     * @param Controller $controller
-     */
-    public function initialize(Controller &$controller) {
-        $this->Controller = $controller;
-    }
-
-    /**
      * Delete multiple records by ids for that <link>$model</link>
      * @param array $ids List ids to be deleted
      * @param Model $model 

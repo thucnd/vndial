@@ -12,9 +12,13 @@ class AuthComponent extends Component {
     public $components = array('RequestHandler', 'Session');
     public $_usersModel;
 
-    function startup(& $controller) {
+    function __construct() {
         App::import('Model', 'User');
         $this->_usersModel = new User;
+        
+        App::uses('SessionComponent', 'Controller/Component');
+        $collection = new ComponentCollection();
+        $this->Session = new SessionComponent($collection);
     }
 
     /**

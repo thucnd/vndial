@@ -9,3 +9,16 @@
     bottom: 0px;
     width: 100%;
 }
+
+.toolbar-box {
+    display: block;
+    margin: 10px 0;
+}
+
+.toolbar-btn {
+    cursor: pointer;
+}
+
+.toolbar-btn:hover {
+    opacity: 0.5;
+}

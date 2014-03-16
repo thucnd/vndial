@@ -19,7 +19,8 @@
             'google-code-prettify/prettify',
             'menu',
             'common',
-            'frontend'
+            'frontend',
+            'table'
             ));
 
         for ($i = 0; $i < count($csss); $i++):
@@ -46,7 +47,10 @@
             'bootstrap-typeahead',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
-            'google-code-prettify/prettify'
+            'google-code-prettify/prettify',
+            'bootstrap-paginator',
+            'bTable',
+            'colResizable-1.3.min'
         ));
 
         for ($i = 0; $i < count($javascripts); $i++):

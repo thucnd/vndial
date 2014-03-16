@@ -42,14 +42,6 @@ class DataTableLogicComponent extends Component {
     public $components = array('DataTableLogic', 'AppLogic', 'Session', 'CampaignLogic');
 
     /**
-     * Initialze component
-     * @param Controller $controller
-     */
-    public function initialize(Controller &$controller) {
-        $this->Controller = $controller;
-    }
-
-    /**
      * Process data table for each request
      * @param array $params
      * @param collection $model
@@ -105,7 +97,7 @@ class DataTableLogicComponent extends Component {
                     $cell[$key] = $row[$model->name][$key];
                 }
             }
-            array_unshift($cell, sprintf(self::_TICK_BOX_, $row[$model->name][$model->primaryKey]));
+            $cell['tickbox'] = sprintf(self::_TICK_BOX_, $row[$model->name][$model->primaryKey]);
             
             // Edit box
             if (array_key_exists('editbox', $columns)) {

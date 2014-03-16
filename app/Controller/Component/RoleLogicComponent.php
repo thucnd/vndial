@@ -13,7 +13,7 @@ class RoleLogicComponent extends Component {
     public $_roleModel;
     public $_controller;
 
-    function startup(& $controller) {
+    function __construct() {
         App::import('Model', 'Role');
         $this->_roleModel = new Role;
     }

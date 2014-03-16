@@ -183,10 +183,10 @@ class TtsController extends AppController {
      */
     private function _getTtsString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 20, 'align' => CENTER_ALIGNMENT),
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 30, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
             'name' => array('name' => __('Name'), 'width' => 200, 'align' => CENTER_ALIGNMENT),
-            'text_data' => array('name' => __('Data'), 'width' => 400, 'align' => CENTER_ALIGNMENT),
+            'text_data' => array('name' => __('Data'), 'width' => 250, 'align' => CENTER_ALIGNMENT),
             'language' => array('name' => __('Language'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
             'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT)
         );
