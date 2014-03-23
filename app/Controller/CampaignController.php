@@ -292,12 +292,12 @@ class CampaignController extends AppController {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 20, 'align' => CENTER_ALIGNMENT),
             'campbox' => array('name' => __('Operations'), 'width' => 130, 'align' => CENTER_ALIGNMENT),
-            'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'name' => array('name' => __('Name'), 'width' => 205, 'align' => CENTER_ALIGNMENT),
-            'caller' => array('name' => __('Caller name'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'camp_type_id' => array('name' => __('Type'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'start_at' => array('name' => __('Start time'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'stop_at' => array('name' => __('Stop time'), 'width' => 100, 'align' => CENTER_ALIGNMENT)
+            'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'name' => array('name' => __('Name'), 'width' => 205, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'caller' => array('name' => __('Caller name'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'camp_type_id' => array('name' => __('Type'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'start_at' => array('name' => __('Start time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'stop_at' => array('name' => __('Stop time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

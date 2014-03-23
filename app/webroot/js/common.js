@@ -29,11 +29,15 @@ function parseHeader() {
         var result = eval("(" + json + ")");
         if (result.status == 1) {
             $.each(result.results, function(key, value) {
+                var sortable = false;
+                if(value.sorting != 'undefined') {
+                    sortable = value.sorting;
+                }
                 var _col = {
                     display: value.name,
                     name: key,
                     width: value.width,
-                    sortable: true,
+                    sortable: sortable,
                     align: value.align
                 };
                 var _sItem = {
@@ -92,7 +96,7 @@ function _displayTable(url, clzName, tableHeader, searchItems) {
         showTableToggleBtn: false,
         resizable: false,
         dblClickResize: true,
-        tblClass: 'table-bordered table-hover table-responsive table-striped',
+        tblClass: 'table-bordered table-hover table-responsive',
         showTableToggleBtn: true,
                 width: 700,
         height: 200

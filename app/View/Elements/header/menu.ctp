@@ -12,16 +12,16 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo __('Voice application'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li >
-                                <a href="<?php echo $this->Html->url(array('controller' => 'campaign', 'action' => 'index')); ?>"><?php echo $this->Html->image('flag_blue.png', array("alt" => "Voice campaign", "style" => "padding-right: 5px;")); ?><?php echo __('Voice campaign'); ?></a>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'campaign', 'action' => 'index')); ?>"><?php echo __('Voice campaign'); ?></a>
                             </li>
                             <li >
-                                <a href="<?php echo $this->Html->url(array('controller' => 'recording', 'action' => 'index')); ?>"><?php echo $this->Html->image('film.png', array("alt" => "Audio files", "style" => "padding-right: 5px;")); ?><?php echo __('Audio files'); ?></a>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'recording', 'action' => 'index')); ?>"><?php echo __('Audio files'); ?></a>
                             </li>
                             <li >
-                                <a href="<?php echo $this->Html->url(array('controller' => 'survey', 'action' => 'index')); ?>"><?php echo $this->Html->image('newspaper.png', array("alt" => "Survey", "style" => "padding-right: 5px;")); ?><?php echo __('Survey'); ?></a>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'survey', 'action' => 'index')); ?>"><?php echo __('Survey'); ?></a>
                             </li>
                             <li >
-                                <a href="<?php echo $this->Html->url(array('controller' => 'tts', 'action' => 'index')); ?>"><?php echo $this->Html->image('user_female.png', array("alt" => "Text to speech", "style" => "padding-right: 5px;")); ?><?php echo __('Text to speech'); ?></a>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'tts', 'action' => 'index')); ?>"><?php echo __('Text to speech'); ?></a>
                             </li>
                         </ul>
                     </li>
@@ -30,10 +30,10 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo __('Contacts'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li >
-                                <a href="<?php echo $this->Html->url(array('controller' => 'contact_group', 'action' => 'index')); ?>"><?php echo $this->Html->image('group.png', array("alt" => "Groups", "style" => "padding-right: 5px;")); ?><?php echo __('Groups'); ?></a>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'contact_group', 'action' => 'index')); ?>"><?php echo __('Groups'); ?></a>
                             </li>
                             <li >
-                                <a href="<?php echo $this->Html->url(array('controller' => 'contact', 'action' => 'index')); ?>"><?php echo $this->Html->image('book.png', array("alt" => "Contacts", "style" => "padding-right: 5px;")); ?><?php echo __('Contacts'); ?></a>
+                                <a href="<?php echo $this->Html->url(array('controller' => 'contact', 'action' => 'index')); ?>"><?php echo __('Contacts'); ?></a>
                             </li>
                         </ul>
                     </li>
@@ -67,6 +67,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->Session->read('User.name'); ?>&nbsp;<b class="caret"></b></a>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="/admin"><i class=""></i>  <?php echo __('Administrator'); ?></a></li>
+                            <li><a href="/user/info"><i class=""></i>  <?php echo __('Account settings'); ?></a></li>
                             <li class="divider"></li>
                             <li><a href="/login/logout" ><i class="icon-off"></i> Log out</a></li>
                         </ul>

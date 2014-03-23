@@ -130,7 +130,7 @@ class RoleController extends AppController {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 30, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'role_name' => array('name' => __('Role name'), 'width' => 200, 'align' => CENTER_ALIGNMENT)
+            'role_name' => array('name' => __('Role name'), 'width' => 200, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

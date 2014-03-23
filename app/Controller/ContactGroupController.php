@@ -141,9 +141,9 @@ class ContactGroupController extends AppController {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 15, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'name' => array('name' => __('Name'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT)
+            'name' => array('name' => __('Name'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 }

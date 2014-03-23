@@ -111,15 +111,15 @@ class CallRequestController extends AppController {
     private function _getCallRequestString() {
         return array(
             'call_request_id' => array('name' => __('ID'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'campaign_id' => array('name' => __('Campaign'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'caller' => array('name' => __('Caller'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'called' => array('name' => __('Called'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'retries' => array('name' => __('Retries'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'start_time' => array('name' => __('Start Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'end_time' => array('name' => __('End Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'hangup' => array('name' => __('Hangup'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT)
+            'campaign_id' => array('name' => __('Campaign'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'caller' => array('name' => __('Caller'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'called' => array('name' => __('Called'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'retries' => array('name' => __('Retries'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'start_time' => array('name' => __('Start Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'end_time' => array('name' => __('End Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'hangup' => array('name' => __('Hangup'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

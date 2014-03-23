@@ -40,19 +40,71 @@ class UserController extends AppController {
     public function index() {
         
     }
-    
+
     /*
      * Edit User Information
      */
+
     public function edit($id = null) {
         $user = $this->User->findByUserId($id);
         $gateways = $this->Gateway->find('all');
         $this->set('gateways', $gateways);
         $this->set('edit', true);
         $this->set('user_id', $id);
-        $this->set('user',$user);
-        
+        $this->set('user', $user);
     }
+
+    /**
+     * info
+     * Display user information
+     * @param type $id
+     */
+    public function info($tab = 1) {
+        $this->layout = 'frontend';
+        $user = $this->User->findByUserId($this->Session->read('User.uid'));
+        $this->set('tab', $tab);
+        $this->set('user', $user);
+    }
+
+    /**
+     * updateinfo
+     */
+    public function updateinfo() {
+        if ($this->request->is('post')) {
+             if ($this->AppLogic->update($this->request->data['UserDetail'], $this->User)) {
+                $this->Session->setFlash(__('Update success'), 'default', array('class' => 'alert alert-success'));
+            } else {
+                $this->Session->setFlash(__('Unable to update your changes.'), 'default', array('class' => 'alert alert-error'));
+            }
+        }
+
+        $this->redirect(array('action' => 'info'));
+    }
+    
+    /*
+     * Change password
+     */
+    public function updatepassword() {
+        if ($this->request->is('post')) {
+            if (strcmp($this->request->data['UserPassword']['password'], $this->request->data['UserPassword']['repassword']) === 0) {
+                    $getUser = $this->User->findByPassword($this->request->data['UserPassword']['old_password']);
+                    if (count($getUser) > 0) {
+                        $this->Session->setFlash(__('Old password is wrong'), 'default', array('class' => 'alert alert-error'));
+                    } else {
+                        $this->request->data['UserPassword']['password'] = md5($this->request->data['UserPassword']['password']);
+                        $ret = $this->AppLogic->update($this->request->data['UserPassword'], $this->User);
+                        $this->Session->setFlash(__('Change password success'), 'default', array('class' => 'alert alert-success'));
+                    }
+                } else {
+                    $this->Session->setFlash(__('Password is not the same as password confirm'), 'default', array('class' => 'alert alert-error'));
+                }
+        }
+        $this->redirect(array('action' => 'info/2'));
+    }
+
+    /*
+     * Create new user
+     */
 
     public function add() {
         $list = $this->Gateway->find('all');
@@ -76,7 +128,7 @@ class UserController extends AppController {
             } else {
                 if (strcmp($this->request->data['password'], $this->request->data['repassword']) === 0) {
                     $getUser = $this->User->findByUsername($this->request->data['username']);
-                    if(count($getUser) > 0 ) {
+                    if (count($getUser) > 0) {
                         array_push($errors, __('Username already exists'));
                     } else {
                         $this->request->data['password'] = md5($this->request->data['password']);
@@ -87,7 +139,7 @@ class UserController extends AppController {
                 }
             }
         }
-        
+
         if ($ret) {
             $this->Session->setFlash('Save sucess');
             $this->set('status', STATUS_OK);
@@ -134,11 +186,11 @@ class UserController extends AppController {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 20, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'username' => array('name' => __('Name'), 'width' => 200, 'align' => LEFT_ALIGNMENT),
-            'role' => array('name' => __('Role'), 'width' => 20, 'align' => CENTER_ALIGNMENT),
-            'gateway_id' => array('name' => __('Gateway'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
-            'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT)
+            'username' => array('name' => __('Name'), 'width' => 200, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'role' => array('name' => __('Role'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'gateway_id' => array('name' => __('Gateway'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

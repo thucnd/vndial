@@ -22,3 +22,11 @@
 .toolbar-btn:hover {
     opacity: 0.5;
 }
+
+.navbar .admin-logo{
+    color: white;
+    font-weight: bold;
+    text-decoration:none;
+    font-size: 22px;
+    text-shadow: none;
+}

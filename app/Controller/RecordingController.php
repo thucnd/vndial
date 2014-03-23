@@ -206,12 +206,12 @@ class RecordingController extends AppController {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 15, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'name' => array('name' => __('Name'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
-            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'type' => array('name' => __('Type'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
-            'path' => array('name' => __('Path'), 'width' => 200, 'align' => LEFT_ALIGNMENT),
-            'size' => array('name' => __('Length'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT)
+            'name' => array('name' => __('Name'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'type' => array('name' => __('Type'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'path' => array('name' => __('Path'), 'width' => 200, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'size' => array('name' => __('Length'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

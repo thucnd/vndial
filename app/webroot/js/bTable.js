@@ -48,6 +48,11 @@ var bTable = {
     displaySorting: function(thisCol) {
         var self = this;
         var sorting = $(thisCol).attr('class');
+
+        if(typeof sorting == 'undefined') {
+            return;
+        }
+        
         if (sorting === 'sorting') {
             $(thisCol).removeClass('sorting');
             $(thisCol).addClass('sorting_asc');
@@ -80,7 +85,7 @@ var bTable = {
         var self = this;
         var str = '<thead><tr>';
         var columns = self.options['colModel'];
-
+       
         for (var i = 0; i < columns.length; i++) {
             var clsSorting = '';
             var relName = '';

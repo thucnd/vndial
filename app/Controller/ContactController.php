@@ -5,7 +5,7 @@
  *
  * Manage contacts
  *
- * $Id: ContactController.php 2013/01/23 khanhle$
+ * $Id: ContactController.php 2013/01/23 thucnd$
  * @update: 2013/01/31 thucnd$
  * 
  */
@@ -146,16 +146,16 @@ class ContactController extends AppController {
      */
     private function _getContactString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 15, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'group_id' => array('name' => __('Group name'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'first_name' => array('name' => __('First Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'last_name' => array('name' => __('Last Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'company' => array('name' => __('Company'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'address' => array('name' => __('Address'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'phone' => array('name' => __('Phone'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'email' => array('name' => __('Email'), 'width' => 155, 'align' => CENTER_ALIGNMENT),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT)
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
+            'editbox' => array('name' => __('Operations'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
+            'group_id' => array('name' => __('Group name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'first_name' => array('name' => __('First Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'last_name' => array('name' => __('Last Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'company' => array('name' => __('Company'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'address' => array('name' => __('Address'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'phone' => array('name' => __('Phone'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'email' => array('name' => __('Email'), 'width' => 155, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

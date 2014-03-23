@@ -9,13 +9,12 @@
         echo $this->Html->meta('icon');
 
         echo $this->Html->css(array(
-            'backend',
-        //   'flexigrid',
             'bootstrap',
             'bootstrap-responsive',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
             'google-code-prettify/prettify',
+            'backend',
             'table'
         ));
 
@@ -41,7 +40,6 @@
             'bootstrap-typeahead',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
-           // 'google-code-prettify/prettify',
             'bootstrap-paginator',
             'bTable',
             'colResizable-1.3.min'
@@ -55,12 +53,6 @@
         echo $this->fetch('css');
         echo $this->fetch('script');
         ?>
-
-
-        <!--[if IE 7]>
-          <link rel="stylesheet" href="themes/font-awesome/css/font-awesome-ie7.min.css" />
-        <![endif]-->
-
         <link rel="stylesheet" href="/themes/css/w8.min.css" />
         <link rel="stylesheet" href="/themes/css/w8-skins.min.css" />
      

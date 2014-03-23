@@ -54,6 +54,17 @@ class AppLogicComponent extends Component {
     }
     
     /**
+     * Update data for this model
+     * @param type $data
+     * @param type $model
+     * @return type
+     */
+    public function update($data, $model) {
+        $date['modified_date'] = date ("Y-m-d H:i:s", $_SERVER['REQUEST_TIME']);
+        return $model->save($data, false);
+    }
+    
+    /**
      * Get data for this model follow permission
      * @param type $model
      * @return data list 

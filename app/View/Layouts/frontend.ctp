@@ -77,6 +77,7 @@
             <div class="main"  >
                 <?php echo $this->fetch('content'); ?>
             </div>
+
         </div>
         <div id="footer">
             COPYRIGHT© VNDIAL CO.,LTD ALL RIGHTS RESERVED.

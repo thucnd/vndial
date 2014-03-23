@@ -1,13 +1,10 @@
-<?php ?>
 <div class="navbar navbar-inverse">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a href="/" class="brand">
-                <small>
-                    <i class="icon-unlock-alt"></i>
-                    VNDIAL ADMIN
-                </small>
-            </a><!--/.brand-->
+            <a href="/" class="admin-logo">
+                <?php echo $this->Html->image('vndial.png', array("alt" => "Home", "style" => "height: 45px; width: 58px;vertical-align: middle;")); ?>
+                VNDIAL ADMIN
+            </a>
 
             <ul class="nav ace-nav pull-right">
                 <li class="light-blue user-profile">

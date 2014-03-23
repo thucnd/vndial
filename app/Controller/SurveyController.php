@@ -215,11 +215,11 @@ class SurveyController extends AppController {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 10, 'align' => LEFT_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'question' => array('name' => __('Question'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
-            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'recording_id' => array('name' => __('Recording'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT),
-            'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT)
+            'question' => array('name' => __('Question'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'recording_id' => array('name' => __('Recording'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
         );
     }
 

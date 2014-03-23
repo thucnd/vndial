@@ -41,6 +41,7 @@ class DataTableLogicComponent extends Component {
      */
     public $components = array('DataTableLogic', 'AppLogic', 'Session', 'CampaignLogic');
 
+
     /**
      * Process data table for each request
      * @param array $params
