@@ -153,7 +153,7 @@ class GatewayController extends AppController {
      */
     private function _getGatewayString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 15, 'align' => CENTER_ALIGNMENT),
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
             'name' => array('name' => __('Name'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
             'gateways' => array('name' => __('Gateways'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),

@@ -290,7 +290,7 @@ class CampaignController extends AppController {
      */
     private function _getCampaignString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 20, 'align' => CENTER_ALIGNMENT),
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
             'campbox' => array('name' => __('Operations'), 'width' => 130, 'align' => CENTER_ALIGNMENT),
             'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
             'name' => array('name' => __('Name'), 'width' => 205, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),

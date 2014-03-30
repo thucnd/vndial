@@ -107,7 +107,7 @@ class ApplicationController extends AppController {
      */
     private function _getApplicationString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 10, 'align' => LEFT_ALIGNMENT),
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => LEFT_ALIGNMENT),
             'app_id' => array('name' => __('ID'), 'width' => 50, 'align' => LEFT_ALIGNMENT),
             'name' => array('name' => __('Name'), 'width' => 50, 'align' => LEFT_ALIGNMENT),
             'description' => array('name' => __('Description'), 'width' => 50, 'align' => LEFT_ALIGNMENT),

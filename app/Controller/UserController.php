@@ -184,7 +184,7 @@ class UserController extends AppController {
      */
     private function _getUserString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 20, 'align' => CENTER_ALIGNMENT),
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
             'username' => array('name' => __('Name'), 'width' => 200, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
             'role' => array('name' => __('Role'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),

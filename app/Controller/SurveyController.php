@@ -213,7 +213,7 @@ class SurveyController extends AppController {
      */
     private function _getSurveyString() {
         return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 10, 'align' => LEFT_ALIGNMENT),
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => LEFT_ALIGNMENT),
             'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
             'question' => array('name' => __('Question'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
             'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
