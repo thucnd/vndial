@@ -24,20 +24,22 @@ var bTable = {
         //Display data table
         this.displayDataTable();
 
-        $("#idTable").colResizable({liveDrag: true});
+        $(this.elem).children('#idTable').colResizable({liveDrag: true});
 
         // Fix header table
         //  this.fixheadertable();
         // $("table.table").floatThead();
 
         //Sorting click
-        $('#idTable th').on('click', function() {
+        $(this.elem).on('click', '#idTable th', function(event) {
+            event.preventDefault();
             self.resetSorting(this);
             self.displaySorting(this);
         });
 
         //Display row total
-        $('#tbPageShow').on('change', function() {
+        $(this.elem).on('change','#tbPageShow', function(event) {
+            event.preventDefault();
             //Reset page = 1
             self.currentPage = 1;
             self.displayDataTable();
@@ -73,7 +75,8 @@ var bTable = {
         self.displayDataTable();
     },
     resetSorting: function(thisCol) {
-        $('#idTable th').each(function() {
+        var self = this;
+        $(self.elem).children('#idTable').find("th").each(function() {
             var sorting = $(this).attr('class');
             if ((sorting === 'sorting_asc' || sorting === 'sorting_desc') && this != thisCol) {
                 $(this).removeClass(sorting);
@@ -120,7 +123,7 @@ var bTable = {
             str += '</div></th>';
         }
         str += '</tr></thead>';
-        $('#idTable').append(str);
+        $(self.elem).children('#idTable').append(str);
     },
     fixheadertable: function() {
 //        var self = this;
@@ -147,8 +150,8 @@ var bTable = {
             str = '<div id="tbPagination"></div>';
         }
 
-        $('#tbFooter').append(str);
-
+        $(self.elem).find('#tbPagination').remove();
+        $(self.elem).children('#tbFooter').append(str);
         var rp = parseInt($('#tbPageShow').val());
         var numberPage = Math.ceil(parseInt(data['total']) / rp);
         var paginations = {
@@ -175,24 +178,24 @@ var bTable = {
                 }
             }
         }
-        $('#tbPagination').bootstrapPaginator(paginations);
+        $(self.elem).find('#tbPagination').bootstrapPaginator(paginations);
     },
     displayTableFooter: function() {
+        var self = this;
         var strPage = '<div class="tb-box-left"><select id="tbPageShow" >';
         strPage += '<option value="10" selected="selected">10</option>';
         strPage += '<option value="25">25</option>';
         strPage += '<option value="50">50</option>';
         strPage += '<option value="100">100</option></select></div>';
         var str = '<div id="tbFooter">' + strPage + '</div>';
-        $('.bTable').append(str);
+        $(self.elem).append(str);
     },
     displayDataTable: function() {
         var self = this;
-
+        
         //Get table data
-        var results = self.getData();
-
-        $('#idTable > tbody').remove();
+        var results = self.getData();        
+        $(self.elem).children('#idTable').find('tbody').remove();
         var str = '<tbody>';
         var data = JSON.parse(results);
         var rows = data['rows'];
@@ -217,7 +220,7 @@ var bTable = {
             str += '</tr>';
         }
         str += '</tbody>';
-        $('#idTable').append(str);
+        $(self.elem).children('#idTable').append(str);
 
         //Display pagination
         self.displayPagination(results);
@@ -294,9 +297,6 @@ if (typeof Object.create !== 'function') {
 
                 // Run the initialization function of plugin
                 plugin.init(options, this);
-
-                // Save the instance of the object in the element's data store
-                $.data(this, 'bTable', plugin);
             });
         }
     };
