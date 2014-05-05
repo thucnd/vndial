@@ -10,7 +10,7 @@
             <span><?php echo __('Users'); ?></span>
         </a></li>
     <li <?php if ($controller === 'role') echo 'class="active"'; ?>><a href="/role">
-            <?php echo $this->Html->image('database_key.png', array("alt" => "Roles", "style" => "padding-right: 5px;")); ?>
+            <?php echo $this->Html->image('database_key.png', array("alt" => "Roles", "style" => "padding-right: 0px;")); ?>
             <span><?php echo __('Roles and permissions'); ?></span>
         </a></li>
     <li <?php if ($controller === 'gateway') echo 'class="active"'; ?>><a href="/gateway">

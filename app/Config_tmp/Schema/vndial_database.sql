@@ -398,8 +398,6 @@ CREATE TABLE `role` (
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
 INSERT INTO `role` VALUES (1,'Supper admin',null);
-INSERT INTO `role` VALUES (2,'Manager','campaign_view:-campaign_edit:-audio_view:-audio_edit:-survey_view:-survey_edit:-tts_view:-tts_edit:-group_view:-group_edit:-contact_view:-contact_edit');
-INSERT INTO `role` VALUES (3,'custom','campaign_view:-audio_view:-survey_view:-tts_view:-group_view:-contact_view');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 

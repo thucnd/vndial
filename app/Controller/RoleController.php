@@ -48,7 +48,7 @@ class RoleController extends AppController {
     public function edit($id = null) {
         $role = $this->Role->findByRoleId($id);
         $permissions = $this->RoleLogic->getPermissionParams();
-        $chkPermissions = explode(":-", $role['Role']['role_permissions']);
+        $chkPermissions = json_decode($role['Role']['role_permissions'], true);
         $this->set('permissions', $permissions);
         $this->set('chkPermissions', $chkPermissions);
         $this->set('edit', true);
@@ -124,7 +124,7 @@ class RoleController extends AppController {
         $errors = array();
         if (isset($this->request->data)) {
             if (isset($this->request->data['chkRole'])) {
-                $rolePermission = implode(':-', $this->request->data['chkRole']);
+                $rolePermission = json_encode($this->request->data['chkRole']);
                 $this->request->data['role_permissions'] = $rolePermission;
             }
             $this->Role->set($this->request->data);

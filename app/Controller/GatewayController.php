@@ -154,15 +154,14 @@ class GatewayController extends AppController {
     private function _getGatewayString() {
         return array(
             'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
+            'editbox' => array('name' => __('Operations'), 'width' => 60, 'align' => CENTER_ALIGNMENT),
             'name' => array('name' => __('Name'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
             'gateways' => array('name' => __('Gateways'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
             'gateway_codecs' => array('name' => __('Gateway Codecs'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
             'gateway_timeouts' => array('name' => __('Gateway Timeouts'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'gateway_retries' => array('name' => __('Gateway Retries'), 'width' => 50, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'gateway_originates' => array('name' => __('Gateway Originates'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'gateway_retries' => array('name' => __('Gateway Retries'), 'width' => 50, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),            
             'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'created_by' => array('name' => __('Created By'), 'width' => 50, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'created_by' => array('name' => __('Created By'), 'width' => 80, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
        );
     }
 
