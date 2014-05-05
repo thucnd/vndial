@@ -110,6 +110,65 @@ class UserController extends AppController {
         $list = $this->Gateway->find('all');
         $this->set('gateways', $list);
     }
+    
+    /**
+     * delele
+     * 
+     * Delete record using Ajax 
+     */
+    public function delete() {
+        $this->layout = false;
+        $ids = $this->request->data['ids'];
+        $ret = false;
+
+        if (isset($ids)) {
+            $ret = $this->AppLogic->deleteMultiple($ids, $this->User);
+        }
+
+        if ($ret) {
+            $this->set('status', STATUS_OK);
+            $this->set('errors', null);
+            $this->set('message', MESSAGE_OK);
+        } else {
+            $this->set('status', STATUS_NG);
+            $this->set('errors', null);
+            $this->set('message', MESSAGE_FAILURE);
+        }
+    }
+    
+    /**
+     * Del
+     * 
+     * Delete record by Id
+     * @param type $id 
+     */
+    public function del($id = null) {
+        $ret = false;
+        if (isset($id)) {
+            $user = $this->User->findByUserId($id);
+            if(count($user) > 0 && $user["User"]["role"] != 1) {
+                $ret = $this->User->delete($id);
+            } else {
+                $this->Session->setFlash("This account can't delete ", 'default', array('class' => 'alert alert-error'));
+                $this->set('status', STATUS_NG);
+                $this->set('message', MESSAGE_FAILURE);
+                $this->redirect('/user');
+            }
+         
+        }
+        if ($ret) {
+            $this->Session->setFlash('Delete sucess', 'default', array('class' => 'alert alert-success'));
+            $this->set('status', STATUS_OK);
+            $this->set('message', MESSAGE_OK);
+        } else {
+            $this->Session->setFlash('Error while delete data', 'default', array('class' => 'alert alert-error'));
+            $this->set('status', STATUS_NG);
+            $this->set('message', MESSAGE_FAILURE);
+        }
+        
+        $this->set('errors', null);        
+        $this->redirect('/user');
+    }
 
     /*
      * Update into database
@@ -193,5 +252,7 @@ class UserController extends AppController {
             'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
         );
     }
+    
+    
 
 }

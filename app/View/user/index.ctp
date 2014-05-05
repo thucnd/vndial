@@ -1,6 +1,6 @@
 <legend><strong><?php echo __('Users'); ?></strong></legend>
 <?php if ($this->Session->check('Message.flash')){ ?> 
-    <div class="alert alert-success message_box"><button type="button" class="close" data-dismiss="alert">&times;</button><?php echo $this->Session->flash(); ?></div>
+    <div class="message_box"><?php echo $this->Session->flash(); ?></div>
 <?php } ?>
 <div class="table-list">
     <div class="toolbar-box">

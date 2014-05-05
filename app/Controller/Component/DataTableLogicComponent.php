@@ -159,6 +159,13 @@ class DataTableLogicComponent extends Component {
                     $cell['campaign_id'] = $row['Campaign']['name'];
                 }
             }
+            
+            // Don't display role as  Supper admin
+            if ($model->name == 'Role') {
+                if (isset($row['Role']['role_id']) && $row['Role']['role_id'] == 1) {
+                    continue;
+                }
+            }
 
             $entry = array('id' => $row[$model->name][$model->primaryKey],
                 'cell' => $cell,

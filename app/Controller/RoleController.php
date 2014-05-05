@@ -56,9 +56,62 @@ class RoleController extends AppController {
         $this->set('role', $role);
     }
 
+    /**
+     * add new role
+     */
     public function add() {
         $permissions = $this->RoleLogic->getPermissionParams();
         $this->set('permissions', $permissions);
+    }
+    
+    /**
+     * delele
+     * 
+     * Delete record using Ajax 
+     */
+    public function delete() {
+        $this->layout = false;
+        $ids = $this->request->data['ids'];
+        $ret = false;
+
+        if (isset($ids)) {
+            $ret = $this->AppLogic->deleteMultiple($ids, $this->Role);
+        }
+
+        if ($ret) {
+            $this->set('status', STATUS_OK);
+            $this->set('errors', null);
+            $this->set('message', MESSAGE_OK);
+        } else {
+            $this->set('status', STATUS_NG);
+            $this->set('errors', null);
+            $this->set('message', MESSAGE_FAILURE);
+        }
+    }
+    
+    /**
+     * Del
+     * 
+     * Delete record by Id
+     * @param type $id 
+     */
+    public function del($id = null) {
+        $ret = false;
+        if (isset($id)) {
+            $ret = $this->Role->delete($id);
+        }
+        if ($ret) {
+            $this->Session->setFlash('Delete sucess', 'default', array('class' => 'alert alert-success'));
+            $this->set('status', STATUS_OK);
+            $this->set('errors', null);
+            $this->set('message', MESSAGE_OK);
+        } else {
+            $this->Session->setFlash('Error while delete data', 'default', array('class' => 'alert alert-error'));
+            $this->set('status', STATUS_NG);
+            $this->set('errors', null);
+            $this->set('message', MESSAGE_FAILURE);
+        }
+        $this->redirect('/role');
     }
 
     /*
