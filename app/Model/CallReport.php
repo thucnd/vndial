@@ -9,7 +9,7 @@
  * 
  */
 class CallReport extends AppModel {
-     public $belongsTo = array(
+    public $belongsTo = array(
         'Campaign' => array(
             'className' => 'Campaign',
             'fields' => 'name',

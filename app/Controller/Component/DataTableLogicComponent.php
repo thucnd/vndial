@@ -162,9 +162,15 @@ class DataTableLogicComponent extends Component {
             
             // Don't display role as  Supper admin
             if ($model->name == 'Role') {
-                if (isset($row['Role']['role_id']) && $row['Role']['role_id'] == 1) {
+                if (isset($row['Role']['role_id']) && $row['Role']['role_id'] == SUPPER_ADMIN) {
                     continue;
                 }
+            }
+            
+            //Display gateway and Role on user
+            if ($model->name == 'User') {
+                $cell['gateway_id'] = $row['Gateway']['name'];
+                $cell['role'] = $row['Role']['role_name'];
             }
 
             $entry = array('id' => $row[$model->name][$model->primaryKey],

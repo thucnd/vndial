@@ -30,3 +30,24 @@
     font-size: 22px;
     text-shadow: none;
 }
+
+.line-box {
+    display: block;
+    padding: 10px 0px;
+}
+
+
+.lbl-required {
+    display: block;
+    font-weight: bold;
+}
+
+.lbl-required em {
+    color: red;
+}
+
+.lbl-note {
+    display: block;
+    font-style: italic;
+    font-size: smaller;
+}

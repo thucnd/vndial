@@ -22,7 +22,7 @@ class UserController extends AppController {
 
     public $layout = 'backend';
     public $name = 'user';
-    public $uses = array('User', 'Gateway');
+    public $uses = array('User', 'Gateway', 'Role');
     public $javascripts = array('user');
     public $components = array('DataTableLogic', 'AppLogic', 'Session');
 
@@ -37,21 +37,40 @@ class UserController extends AppController {
         return parent::beforeFilter();
     }
 
-    public function index() {
-        
+    public function index() {      
+    }    
+    
+    /*
+     * Create new user
+     */
+    public function add() {
+        $uid = $this->Session->read('User.uid');
+        // Get user information
+        $user = $this->User->findByUserId($uid);
+        //Get Role list
+        $roles = $this->Role->find('all');
+        // Get gateway list
+        $list = $this->Gateway->find('all');
+        $this->set('gateways', $list);
+        $this->set('roles', $roles);
+        $this->set('user', $user);
     }
 
     /*
      * Edit User Information
      */
-
     public function edit($id = null) {
+        // Get user information
         $user = $this->User->findByUserId($id);
+        // Get Role list
+        $roles = $this->Role->find('all');
+        // Get gateway list
         $gateways = $this->Gateway->find('all');
         $this->set('gateways', $gateways);
         $this->set('edit', true);
         $this->set('user_id', $id);
         $this->set('user', $user);
+        $this->set('roles', $roles);
     }
 
     /**
@@ -61,6 +80,7 @@ class UserController extends AppController {
      */
     public function info($tab = 1) {
         $this->layout = 'frontend';
+        // Get user information
         $user = $this->User->findByUserId($this->Session->read('User.uid'));
         $this->set('tab', $tab);
         $this->set('user', $user);
@@ -100,15 +120,6 @@ class UserController extends AppController {
                 }
         }
         $this->redirect(array('action' => 'info/2'));
-    }
-
-    /*
-     * Create new user
-     */
-
-    public function add() {
-        $list = $this->Gateway->find('all');
-        $this->set('gateways', $list);
     }
     
     /**

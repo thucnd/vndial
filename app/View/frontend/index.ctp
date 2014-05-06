@@ -1,3 +1,4 @@
+<?php $this->Role->checkPermission("campaign_view"); ?>
 <div class="folder-box" >
     <div class="list-folder">
           <div id="element-box" class="folder" >

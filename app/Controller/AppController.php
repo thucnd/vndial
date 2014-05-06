@@ -54,6 +54,9 @@ define('LEFT_ALIGNMENT', 'left');
 define('RIGHT_ALIGNMENT', 'right');
 define('CENTER_ALIGNMENT', 'center');
 
+//-------------------------------------------
+// Define Supper Admin
+define('SUPPER_ADMIN', 1);
 class AppController extends Controller {
 
     /**

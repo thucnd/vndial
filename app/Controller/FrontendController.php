@@ -21,6 +21,7 @@ class FrontendController extends AppController {
     public $uses = null;
     public $javascripts = null;
     public $csss        = array('login');
+    public $helpers = array('Role');
 
     function beforeFilter() {
         $this->pageTitle = __('Vndial');

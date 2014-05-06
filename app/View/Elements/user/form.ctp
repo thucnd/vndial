@@ -9,7 +9,7 @@ if (!isset($edit)) {
         <?php echo __('Username'); ?>
         <em>*</em>
     </label>
-    <input name="username" type="text" id="username" class="required" <?php if ($edit) echo 'readonly'; ?>   value="<?php if ($edit) echo $user['User']['username']; ?>"/>
+    <input name="username" type="text" id="username" class="required" <?php if ($edit) echo 'readonly'; ?>   value="<?php if ($edit) echo $user['User']['username']; ?>" autocomplete="off"/>
     <label class="lbl-note">
         <?php echo __('Required. 30 characters or fewer. Letters, digits'); ?>
     </label>
@@ -20,7 +20,7 @@ if (!isset($edit)) {
         <?php echo __('Password'); ?>
         <em>*</em>
     </label>
-    <input name="password" type="password" id="password" class="required" value=""/>
+    <input name="password" type="password" id="password" class="required" value="" autocomplete="off"/>
 </div>
 
 <div class="line-box">
@@ -28,7 +28,7 @@ if (!isset($edit)) {
         <?php echo __('Password confirm'); ?>
         <em>*</em>
     </label>
-    <input name="repassword" type="password" id="repassword" class="required" value=""/>
+    <input name="repassword" type="password" id="repassword" class="required" value="" autocomplete="off"/>
 </div>
 
 <legend></legend>
@@ -82,6 +82,22 @@ if (!isset($edit)) {
     <input class="input-xlarge" name="company_website" type="text" id="company_website" value="<?php if ($edit) echo $user['User']['company_website']; ?>"/>
 </div>
 
+<div class="line-box">
+    <label class="lbl-required" >
+        <?php echo __('Role'); ?>
+        <em>*</em>
+    </label>
+    <select name="role" id="role" class="input-medium">
+        <?php foreach ($roles as $role) { ?>
+            <?php if(intval($role['Role']['role_id']) == SUPPER_ADMIN && !$edit) {continue; }?>
+            <?php if(intval($user['User']['role']) != SUPPER_ADMIN && intval($role['Role']['role_id']) == SUPPER_ADMIN ) {continue; }?>
+            <option value="<?php echo $role['Role']['role_id']; ?>" <?php if(intval($user['User']['role']) == intval($role['Role']['role_id'])){ echo 'selected';} ?>>
+                <?php echo $role['Role']['role_name']; ?>
+            </option>
+        <?php } ?>
+    </select>
+</div>
+
 <legend></legend>
 
 <div class="line-box">
@@ -90,8 +106,10 @@ if (!isset($edit)) {
         <em>*</em>
     </label>
     <select name="gateway_id" id="gateway_id" class="input-medium">
-        <?php foreach ($gateways as $value) { ?>
-            <option value="<?php echo $value['Gateway']['gateway_id']; ?>"><?php echo $value['Gateway']['name']; ?></option>
+        <?php foreach ($gateways as $gateway) { ?>            
+            <option value="<?php echo $gateway['Gateway']['gateway_id']; ?>" <?php if(intval($user['User']['gateway_id']) == intval($gateway['Gateway']['gateway_id'])){ echo 'selected';} ?>>
+                <?php echo $gateway['Gateway']['name']; ?>
+            </option>
         <?php } ?>
     </select>
 </div>

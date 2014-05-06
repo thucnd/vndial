@@ -5,11 +5,23 @@
  *
  * Model to manipulate table users
  *
- * $Id: UserModel.php 2013/03/03 thucnd$
+ * $Id: UserModel.php 2013/03/03 ThucNd$
  * 
  */
 class User extends AppModel {
-
+    public $belongsTo = array(
+        'Role' => array(
+            'className' => 'Role',
+            'fields' => array('role_name', 'role_permissions'),
+            'foreignKey' => 'role'
+        ),
+        'Gateway' => array(
+            'className' => 'Gateway',
+            'fields' => array('gateway_id', 'name'),
+            'foreignKey' => 'gateway_id'
+        )
+    );
+    
     /**
      * Alias for user model
      *
