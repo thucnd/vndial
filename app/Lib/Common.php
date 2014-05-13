@@ -5,7 +5,7 @@
  *
  * Common function
  *
- * $Id: Common.php 2013/01/19 khanhle$
+ * $Id: Common.php 2014/05/12 ThucNd$
  * 
  */
 /**
@@ -13,7 +13,6 @@
  */
 
 class Common {
-    
 }
 
 ?>

@@ -24,6 +24,8 @@ class ContactGroupController extends AppController {
     public $name = 'contact_group';
     public $javascripts = array('group');
     public $csss = array();
+    // Load Role helper
+    public $helpers = array('Role');
 
     /**
      * An array containing the class names of models this controller uses.

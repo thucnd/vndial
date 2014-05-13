@@ -26,6 +26,8 @@ class SurveyController extends AppController {
     public $name = 'survey';
     public $javascripts = array('survey');
     public $csss = array();
+    // Load Role helper
+    public $helpers = array('Role');
 
     /**
      * An array containing the class names of models this controller uses.

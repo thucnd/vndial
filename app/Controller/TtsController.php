@@ -24,6 +24,8 @@ class TtsController extends AppController {
     public $name = 'tts';
     public $javascripts = array('tts');
     public $csss = array();
+    // Load Role helper
+    public $helpers = array('Role');
 
     /**
      * An array containing the class names of models this controller uses.

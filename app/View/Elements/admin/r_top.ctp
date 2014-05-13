@@ -20,14 +20,7 @@
 
                     <ul class="pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer" id="user_menu">
                         <li>
-                            <a href="#">
-                                <i class="icon-cog"></i>
-                                Settings
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="#">
+                            <a href="/user/edit/<?php echo $this->Session->read('User.uid');?>">
                                 <i class="icon-user"></i>
                                 Profile
                             </a>

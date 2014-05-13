@@ -37,6 +37,8 @@ class CampaignController extends AppController {
     public $name = 'campaign';
     public $javascripts = array('campaign');
     public $csss = array();
+    // Load Role helper
+    public $helpers = array('Role');
 
     /**
      * An array containing the class names of models this controller uses.

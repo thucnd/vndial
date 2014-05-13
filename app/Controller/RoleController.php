@@ -25,6 +25,8 @@ class RoleController extends AppController {
     public $uses = array('Role');
     public $javascripts = array('role');
     public $components = array('DataTableLogic', 'AppLogic', 'Session', 'RoleLogic');
+    // Load Role helper
+    public $helpers = array('Role');
 
     function beforeFilter() {
         $this->pageTitle = __('Roles');

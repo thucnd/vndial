@@ -21,6 +21,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('Controller', 'Controller');
+App::uses('Common', 'Lib');
 
 /**
  * Application Controller
@@ -64,6 +65,7 @@ class AppController extends Controller {
      * @var array
      */
     public $columns = array();
+    
 
     /**
      * Default column to be sorted
@@ -82,8 +84,9 @@ class AppController extends Controller {
      * @var int 
      */
     public $defaultHeight = 300;
-    public $components = array('Auth', 'Session');
-
+    public $components = array('Auth', 'Session', 'RoleLogic');
+    public $helpers = array('Role');
+    
     /**
      * beforeRender
      */
@@ -100,7 +103,12 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         if ($this->name !== 'plivo') {
-            if ($this->layout === 'backend') {
+            if ($this->layout == 'backend') {                
+                if(!$this->RoleLogic->checkPermission('admin_page')) {
+                    $this->Session->setFlash(__("you don't have permission access"), 'default', array('class' => 'alert alert-error'));
+                    $this->Session->write("redirect", '/');
+                    $this->redirect('/login');
+                }
                 $this->Session->write("redirect", '/admin');
             } else {
                 $this->Session->write("redirect", '/');

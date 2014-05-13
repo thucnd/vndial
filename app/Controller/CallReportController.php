@@ -24,7 +24,8 @@ class CallReportController extends AppController {
     public $name = 'call_report';
     public $javascripts = array('gateway');
     public $csss = array();
-
+    // Load Role helper
+    public $helpers = array('Role');
     /**
      * An array containing the class names of models this controller uses.
      * @var array 

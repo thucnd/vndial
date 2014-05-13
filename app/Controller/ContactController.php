@@ -25,6 +25,8 @@ class ContactController extends AppController {
     public $name = 'contact';
     public $javascripts = array('contact');
     public $csss = array();
+    // Load Role helper
+    public $helpers = array('Role');
 
     /**
      * An array containing the class names of models this controller uses.

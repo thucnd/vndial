@@ -24,12 +24,14 @@ class RecordingController extends AppController {
     public $name = 'recording';
     public $javascripts = array('recording', 'webtoolkit.aim');
     public $csss = array();
+    // Load Role helper
+    public $helpers = array('Role');
 
     /**
      * An array containing the class names of models this controller uses.
      * @var array 
      */
-    public $uses = array('Recording', 'Setting');
+    public $uses = array('Recording', 'Setting', 'Role');
 
     /**
      * Component

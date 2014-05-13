@@ -7,22 +7,18 @@
 * $Id: login_controller.php 2013/01/01 ThucNd$
 * 
 */
-
 App::uses('AppController', 'Controller');
-
 /**
  * Login Controller
  *
  */
 class LoginController extends AppController {
-
     public $layout = 'default';
     public $name = 'login';
     public $uses = array('User');
     public $javascripts = array('login');
-    public $csss        = array('login');
-    
-    public $components = array('DataTableLogic', 'AppLogic', 'Auth', 'Session');
+    public $csss        = array('login');    
+    public $components  = array('DataTableLogic', 'AppLogic', 'Auth', 'Session');
 
     function beforeFilter() {
         $this->pageTitle = 'Login';

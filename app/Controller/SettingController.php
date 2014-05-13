@@ -19,7 +19,7 @@ class SettingController extends AppController {
     public $layout = 'backend';
     public $name = 'setting';
     public $javascripts = array('setting');
-    public $helpers = array('App');
+    public $helpers = array('App', 'Role');
     public $csss = null;
 
     /**

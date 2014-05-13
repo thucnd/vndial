@@ -7,23 +7,15 @@
  * $Id: RoleHelper.php 2014/05/06 ThucNd$
  * 
  */
-
 App::uses('Helper', 'View');
-App::uses('SessionHelper', 'View/Helper');
-App::import('Model', 'User');
-
-class RoleHelper extends Helper {    
-        
-    private $_user;
-    const _SUPPER_ADMIN_ = 1;
-    /**
-     * Load Role information
-     */
+class RoleHelper extends Helper {   
+    private $RoleLogic; 
     function __construct() {
-        // Load Role Model        
-        $this->_user = new User;
+        // Load setting
+        App::uses('RoleLogicComponent', 'Controller/Component');
+        $collection = new ComponentCollection();
+        $this->RoleLogic = new RoleLogicComponent($collection);
     }
-            
     /**
      * checkPermission
      * Check Permision of Users
@@ -31,16 +23,7 @@ class RoleHelper extends Helper {
      * @return boolean
      */
     function checkPermission($role) {
-        $uid = SessionHelper::read('User.uid');
-        $user = $this->_user->findByUserId($uid);
-        
-        //Supper Admin has full access
-        if(intval($user['User']['role']) !== self::_SUPPER_ADMIN_) {
-            $roles = json_decode($user['Role']['role_permissions'], true);
-            if(!in_array($role, $roles)) {
-                return false;
-            }
-        } 
-        return true;
+        return $this->RoleLogic->checkPermission($role);
+
     }
 }

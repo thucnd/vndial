@@ -19,12 +19,15 @@ class UserController extends AppController {
 
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
+    const _EDIT_ = 1;
 
     public $layout = 'backend';
     public $name = 'user';
     public $uses = array('User', 'Gateway', 'Role');
     public $javascripts = array('user');
     public $components = array('DataTableLogic', 'AppLogic', 'Session');
+    // Load Role helper
+    public $helpers = array('Role');
 
     function beforeFilter() {
         $this->pageTitle = __('Users');
@@ -71,6 +74,7 @@ class UserController extends AppController {
         $this->set('user_id', $id);
         $this->set('user', $user);
         $this->set('roles', $roles);
+        $this->set('edit', true);
     }
 
     /**
@@ -97,8 +101,12 @@ class UserController extends AppController {
                 $this->Session->setFlash(__('Unable to update your changes.'), 'default', array('class' => 'alert alert-error'));
             }
         }
-
-        $this->redirect(array('action' => 'info'));
+        
+        if($this->request->data['edit'] == self::_EDIT_) {
+            $this->redirect(array('action' => 'index'));
+        } else {
+            $this->redirect(array('action' => 'info'));
+        }
     }
     
     /*
@@ -119,7 +127,12 @@ class UserController extends AppController {
                     $this->Session->setFlash(__('Password is not the same as password confirm'), 'default', array('class' => 'alert alert-error'));
                 }
         }
-        $this->redirect(array('action' => 'info/2'));
+        
+        if($this->request->data['edit'] == self::_EDIT_) {
+            $this->redirect(array('action' => 'index'));
+        } else {
+            $this->redirect(array('action' => 'info/2'));
+        }
     }
     
     /**
@@ -184,7 +197,6 @@ class UserController extends AppController {
     /*
      * Update into database
      */
-
     public function save() {
         $this->layout = false;
         $ret = false;

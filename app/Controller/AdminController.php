@@ -20,6 +20,7 @@ class AdminController extends AppController {
     public $name = 'admin';
     public $uses = null;
     public $javascripts = null;
+    public $helpers = array('Role');
 
     function beforeFilter() {
         $this->pageTitle = __('Administrator');
