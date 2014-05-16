@@ -1,4 +1,4 @@
-<div class="folder-box" >
+<!--<div class="folder-box" >
     <div class="list-folder">
           <div id="element-box" class="folder" >
   
@@ -56,4 +56,4 @@
         
         <div style="clear: both"></div>
     </div>
-</div>
+</div>-->

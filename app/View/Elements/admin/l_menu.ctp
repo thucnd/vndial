@@ -26,7 +26,7 @@
         </a></li>
     <?php } ?>
     
-    <?php if($this->Role->checkPermission('voice_view')) { ?>    
+    <?php if($this->Role->checkPermission('gateway_view')) { ?>    
         <li <?php if ($controller === 'setting') echo 'class="active"'; ?>><a href="/setting">
             <?php echo $this->Html->image('voice_setting.png', array("alt" => "Settings", "style" => "padding-right: 5px;")); ?>
             <span><?php echo __('Voice settings'); ?></span>

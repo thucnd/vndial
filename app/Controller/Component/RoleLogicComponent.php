@@ -9,22 +9,23 @@
  */
 App::uses('SessionHelper', 'View/Helper');
 App::import('Model', 'User');
+
 class RoleLogicComponent extends Component {
 
     public $components = array('RequestHandler', 'Session');
     public $_roleModel;
     public $_controller;
-    
     private $_user;
+
     const _SUPPER_ADMIN_ = 1;
 
     function __construct() {
         App::import('Model', 'Role');
         $this->_roleModel = new Role;
-        
+
         $this->_user = new User;
     }
-    
+
     /**
      * permission_params
      * 
@@ -42,8 +43,8 @@ class RoleLogicComponent extends Component {
                 'campaign_edit' => __('Manage campaigns')
             ),
             __('Audio files') => array(
-                'audio_view' => __('View audio files'),
-                'audio_edit' => __('Manage audio files')
+                'recording_view' => __('View audio files'),
+                'recording_edit' => __('Manage audio files')
             ),
             __('Survey') => array(
                 'survey_view' => __('View survey'),
@@ -80,7 +81,7 @@ class RoleLogicComponent extends Component {
         );
         return $params;
     }
-    
+
     /**
      * checkPermission
      * Check Permision of Users
@@ -90,17 +91,27 @@ class RoleLogicComponent extends Component {
     function checkPermission($role) {
         //Get User ID information
         $uid = SessionHelper::read('User.uid');
-        $user = $this->_user->findByUserId($uid);        
+        $user = $this->_user->findByUserId($uid);
+        //Get permission list
+        $permissions = $this->getPermissionParams();
+        $roleExisting = FALSE;
+        foreach ($permissions as $permission) {
+            if (array_key_exists($role, $permission)) {
+                $roleExisting =  TRUE;
+            }
+        }
+        // if we don don't set permission this page, skip check permission
+        if(!$roleExisting) return TRUE;
         //Supper Admin has full access
-        if(intval($user['User']['role']) !== self::_SUPPER_ADMIN_) {
+        if (intval($user['User']['role']) !== self::_SUPPER_ADMIN_) {
             $roles = json_decode($user['Role']['role_permissions'], true);
-            if(!in_array($role, $roles)) {
+            if (!in_array($role, $roles)) {
                 return false;
             }
-        } 
+        }
         return true;
     }
-        
+
 }
 
 ?>

@@ -58,6 +58,7 @@ define('CENTER_ALIGNMENT', 'center');
 //-------------------------------------------
 // Define Supper Admin
 define('SUPPER_ADMIN', 1);
+
 class AppController extends Controller {
 
     /**
@@ -65,7 +66,6 @@ class AppController extends Controller {
      * @var array
      */
     public $columns = array();
-    
 
     /**
      * Default column to be sorted
@@ -86,7 +86,7 @@ class AppController extends Controller {
     public $defaultHeight = 300;
     public $components = array('Auth', 'Session', 'RoleLogic');
     public $helpers = array('Role');
-    
+
     /**
      * beforeRender
      */
@@ -103,8 +103,8 @@ class AppController extends Controller {
 
     public function beforeFilter() {
         if ($this->name !== 'plivo') {
-            if ($this->layout == 'backend') {                
-                if(!$this->RoleLogic->checkPermission('admin_page')) {
+            if ($this->layout == 'backend') {
+                if (!$this->RoleLogic->checkPermission('admin_page')) {
                     $this->Session->setFlash(__("you don't have permission access"), 'default', array('class' => 'alert alert-error'));
                     $this->Session->write("redirect", '/');
                     $this->redirect('/login');
@@ -113,10 +113,17 @@ class AppController extends Controller {
             } else {
                 $this->Session->write("redirect", '/');
             }
-            
+
+            if ( !$this->RoleLogic->checkPermission($this->name . '_view')) {
+                $this->Session->setFlash(__("you don't have permission access"), 'default', array('class' => 'alert alert-error'));
+                $this->Session->write("redirect", '/');
+                $this->redirect('/login');
+            }
+            $this->Session->write("redirect", '/admin');
+
             if (!$this->Auth->isLogin()) {
                 $this->redirect('/login');
-            } 
+            }
         }
     }
 
