@@ -119,7 +119,6 @@ class AppController extends Controller {
                 $this->Session->write("redirect", '/');
                 $this->redirect('/login');
             }
-            $this->Session->write("redirect", '/admin');
 
             if (!$this->Auth->isLogin()) {
                 $this->redirect('/login');
