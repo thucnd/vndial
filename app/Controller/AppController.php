@@ -106,7 +106,7 @@ class AppController extends Controller {
             if ($this->layout == 'backend') {
                 if (!$this->RoleLogic->checkPermission('admin_page')) {
                     $this->Session->setFlash(__("you don't have permission access"), 'default', array('class' => 'alert alert-error'));
-                    $this->Session->write("redirect", '/');
+                    $this->Session->write("redirect", '/admin');
                     $this->redirect('/login');
                 }
                 $this->Session->write("redirect", '/admin');
@@ -116,7 +116,6 @@ class AppController extends Controller {
 
             if ( !$this->RoleLogic->checkPermission($this->name . '_view')) {
                 $this->Session->setFlash(__("you don't have permission access"), 'default', array('class' => 'alert alert-error'));
-                $this->Session->write("redirect", '/');
                 $this->redirect('/login');
             }
 
