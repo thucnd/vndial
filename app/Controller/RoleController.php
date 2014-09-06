@@ -1,5 +1,4 @@
 <?php
-
 /**
  * RoleController.php
  *
@@ -11,15 +10,9 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * Role Controller
- *
- */
 class RoleController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
-
     public $layout = 'backend';
     public $name = 'role';
     public $uses = array('Role');
@@ -31,22 +24,19 @@ class RoleController extends AppController {
     function beforeFilter() {
         $this->pageTitle = __('Roles');
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getRoleString();
+        $this->columns = $this->Role->_getRoleString();
         $this->defaultSort = 'role_name';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
         return parent::beforeFilter();
     }
 
-    public function index() {
-        
+    public function index() {        
     }
 
     /*
      * Edit Role Information
      */
-
     public function edit($id = null) {
         $role = $this->Role->findByRoleId($id);
         $permissions = $this->RoleLogic->getPermissionParams();
@@ -119,7 +109,6 @@ class RoleController extends AppController {
     /*
      * Update into database
      */
-
     public function save() {
         $this->layout = false;
         $ret = false;
@@ -152,13 +141,16 @@ class RoleController extends AppController {
         $this->render('exec');
     }
 
+    /**
+     * Get Header Information
+     */
     public function exec() {
         $this->layout = false;
+        $status = STATUS_NG;
         if (isset($this->request->data['header']) &&
                 $this->request->data['header'] === RoleController::_HEADER_) {
-            $status = 1;
+            $status = STATUS_OK;
         }
-
         $this->set('list', null);
         $this->set('status', STATUS_OK);
         $this->set('errors', null);
@@ -172,21 +164,6 @@ class RoleController extends AppController {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
                 $this->request->data, $this->Role, $this->columns);
-
-
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in User controller
-     * @return array
-     */
-    private function _getRoleString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'role_name' => array('name' => __('Role name'), 'width' => 200, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

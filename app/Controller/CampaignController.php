@@ -16,19 +16,16 @@ App::uses('Sanitize', 'Utility');
  *
  */
 class CampaignController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
     const _CAMPAIGN_PLAY_AUDIO_ = 1;
     const _CAMPAIGN_SURVEY_ = 2;
     const _CAMPAIGN_TEXT_TO_SPEECH_ = 3;
-    
     const _CAMPAIGN_START_DATE_WRONG_ = -1;
     const _CAMPAIGN_END_DATE_WRONG_ = -2;
     const _CAMPAIGN_START_TIME_WRONG_ = -3;
     const _CAMPAIGN_END_TIME_WRONG_ = -4;
     const _CAMPAIGN_DATE_TIME_WRONG_ = -5;
-    
     const _CAMPAIGN_ACTIVE_ = 1;
     const _CAMPAIGN_PAUSED_ = 2;
     const _CAMPAIGN_STOP_ = 3;
@@ -55,19 +52,19 @@ class CampaignController extends AppController {
     function beforeFilter() {
         $this->pageTitle = __('Campaigns');
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getCampaignString();
+        $this->columns = $this->Campaign->_getCampaignString();
         $this->defaultSort = 'name';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
-
         return parent::beforeFilter();
     }
 
     public function index() {
-        
     }
 
+    /**
+     * Create new campaign
+     */
     public function add() {
         $groups = $this->AppLogic->getAllData($this->ContactGroup);
         $gateways = $this->AppLogic->getAllData($this->Gateway);
@@ -81,7 +78,6 @@ class CampaignController extends AppController {
     /*
      * Edit Campaign Information
      */
-
     public function edit($id = null) {
         $campaign = $this->Campaign->findByCampaignId($id);
         $groups = $this->AppLogic->getAllData($this->ContactGroup);
@@ -110,7 +106,6 @@ class CampaignController extends AppController {
     /*
      * Update into database
      */
-
     public function save() {
         $this->layout = false;
         $ret = false;
@@ -153,6 +148,9 @@ class CampaignController extends AppController {
         }
     }
 
+    /**
+     * Get Header information
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
@@ -213,6 +211,9 @@ class CampaignController extends AppController {
         $this->redirect('/campaign');
     }
 
+    /**
+     * Update Campaign information
+     */
     public function update() {
         $this->layout = false;
         if (intval($this->request->data['campaign_type_id']) === self::_CAMPAIGN_PLAY_AUDIO_) {
@@ -229,6 +230,9 @@ class CampaignController extends AppController {
         $this->render('exec');
     }
 
+    /**
+     * Delete campaign information
+     */
     public function delete() {
         $this->layout = false;
         $ids = $this->request->data['ids'];
@@ -282,25 +286,6 @@ class CampaignController extends AppController {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
                 $this->request->data, $this->Campaign, $this->columns);
-
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in Tts controller
-     * @return array
-     */
-    private function _getCampaignString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'campbox' => array('name' => __('Operations'), 'width' => 130, 'align' => CENTER_ALIGNMENT),
-            'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'name' => array('name' => __('Name'), 'width' => 205, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'caller' => array('name' => __('Caller name'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'camp_type_id' => array('name' => __('Type'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'start_at' => array('name' => __('Start time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'stop_at' => array('name' => __('Stop time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

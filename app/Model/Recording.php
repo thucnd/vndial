@@ -87,6 +87,23 @@ class Recording extends AppModel {
     public function getRecordingListByCondition() {
         return $this->getListByCondition();
     }
+    
+    /**
+     * List of key-value to be displayed in gateway controller
+     * @return array
+     */
+    public function _getRecordingString() {
+        return array(
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'TickBox'),
+            'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'EditBox'),
+            'name' => array('name' => __('Name'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'type' => array('name' => __('Type'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'path' => array('name' => __('Path'), 'width' => 200, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'size' => array('name' => __('Length'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
+        );
+    }
 }
 
 ?>

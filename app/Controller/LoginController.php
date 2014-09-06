@@ -24,8 +24,7 @@ class LoginController extends AppController {
         $this->pageTitle = 'Login';
     }
     
-    public function index() {
-        
+    public function index() {        
     }
     
     public function  exec() {

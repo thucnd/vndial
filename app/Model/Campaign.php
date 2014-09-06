@@ -128,7 +128,23 @@ class Campaign extends AppModel {
     public function getCampaignListByCondition() {
         return $this->getListByCondition();
     }
-
+    
+    /**
+     * List of key-value to be displayed in Tts controller
+     * @return array
+     */
+    public function _getCampaignString() {
+        return array(
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'TickBox'),
+            'campbox' => array('name' => __('Operations'), 'width' => 130, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'CampBox'),
+            'status' => array('name' => __('Status'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE, 'funcData' => 'Status'),
+            'name' => array('name' => __('Name'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'caller' => array('name' => __('Caller name'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'camp_type_id' => array('name' => __('Type'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE, 'funcData' => 'CampaignType'),
+            'start_at' => array('name' => __('Start time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'stop_at' => array('name' => __('Stop time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
+        );
+    }
 }
 
 ?>

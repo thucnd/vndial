@@ -18,10 +18,8 @@ App::uses('File', 'Utility');
  *
  */
 class PlivoController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
-
     public $layout = 'voip';
     public $name = 'plivo';
     public $uses = array('Recording', 'Setting');

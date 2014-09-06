@@ -1,25 +1,18 @@
 <?php
-
 /**
  * CallReportController.php
  *
  * Manage contacts
  *
- * $Id: CallReportController.php 2013/01/23 khanhle$
+ * $Id: CallReportController.php 2013/01/23 ThucNd
  * 
  */
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * CallReport Controller
- *
- */
 class CallReportController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
-
     public $layout = 'frontend';
     public $name = 'call_report';
     public $javascripts = array('gateway');
@@ -43,23 +36,22 @@ class CallReportController extends AppController {
         setcookie("s", null);
         setcookie("e", null);
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getCallReportString();
+        $this->columns = $this->CallReport->_getCallReportString();
         $this->defaultSort = 'caller';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
-
         return parent::beforeFilter();
     }
 
     public function index() {
-        
     }
 
     public function add() {
-        
     }
 
+    /**
+     * Get header information
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
@@ -100,26 +92,6 @@ class CallReportController extends AppController {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
                 $this->request->data, $this->CallReport, $this->columns);
-        
-        
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in gateway controller
-     * @return array
-     */
-    private function _getCallReportString() {
-        return array(
-            'call_report_id' => array('name' => __('ID'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'campaign_id' => array('name' => __('Campaign'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'caller' => array('name' => __('From'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'called' => array('name' => __('To'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'start_time' => array('name' => __('Start Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'end_time' => array('name' => __('End Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'hangupcause' => array('name' => __('Hangup'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

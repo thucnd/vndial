@@ -107,7 +107,17 @@ class Role extends AppModel {
     public function getRoleListByCondition() {
         return $this->getListByCondition();
     }
-
+    
+     /**
+     * List of key-value to be displayed in User controller
+     * @return array
+     */
+     public function _getRoleString() {
+        return array(
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'TickBox'),
+            'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'EditBox'),
+            'role_name' => array('name' => __('Role name'), 'width' => 200, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
+        );
+    }
 }
-
 ?>

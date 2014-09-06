@@ -76,6 +76,23 @@ class CallReport extends AppModel {
     public function getCallReportListByCondition() {
         return $this->getListByCondition();
     }
+    
+    /**
+     * List of key-value to be displayed in gateway controller
+     * @return array
+     */
+    public function _getCallReportString() {
+        return array(
+            'call_report_id' => array('name' => __('ID'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
+            'campaign_id' => array('name' => __('Campaign'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE, 'funcData' => 'CampaignName'),
+            'caller' => array('name' => __('From'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'called' => array('name' => __('To'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'start_time' => array('name' => __('Start Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'end_time' => array('name' => __('End Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'hangupcause' => array('name' => __('Hangup'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
+        );
+    }
 }
 
 ?>

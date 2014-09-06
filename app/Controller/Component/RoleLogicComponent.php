@@ -11,7 +11,6 @@ App::uses('SessionHelper', 'View/Helper');
 App::import('Model', 'User');
 
 class RoleLogicComponent extends Component {
-
     public $components = array('RequestHandler', 'Session');
     public $_roleModel;
     public $_controller;
