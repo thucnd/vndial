@@ -16,7 +16,7 @@ class FrontendController extends AppController {
     public $layout = 'frontend';
     public $name = 'frontend';
     public $uses = null;
-    public $javascripts = null;
+    public $javascripts = array('jqPlot/jquery.jqplot.min','jqPlot/plugins/jqplot.pieRenderer.min','jqPlot/plugins/jqplot.donutRenderer.min', 'frontend');
     public $csss        = array('login');
     public $helpers = array('Role');
 

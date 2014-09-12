@@ -30,7 +30,7 @@ function parseHeader() {
         if (result.status == 1) {
             $.each(result.results, function(key, value) {
                 var sortable = false;
-                if(value.sorting != 'undefined') {
+                if (value.sorting != 'undefined') {
                     sortable = value.sorting;
                 }
                 var _col = {
@@ -101,6 +101,43 @@ function _displayTable(url, clzName, tableHeader, searchItems) {
                 width: 700,
         height: 200
     });
+}
+
+/**
+ * init datePicker
+ * @param {string} startDate
+ * @param {string} endDate
+ * @param {int} disDate - Disable Date from today
+ * @returns {undefined}
+ */
+function displayDatePicker(startDate, endDate, disDate) {
+    // Set start_time and end_time
+    var nowTemp = new Date();
+    var now = new Date();
+    if(typeof(disDate) != "undefined"){
+        now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()-disDate, 0, 0, 0, 0);
+    }
+
+    var checkin = $(startDate).datepicker({
+        onRender: function(date) {
+            return ((typeof(disDate) != "undefined") && (date.valueOf() < now.valueOf())) ? 'disabled' : '';
+        }
+    }).on('changeDate', function(ev) {
+        if (ev.date.valueOf() > checkout.date.valueOf()) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 1);
+            checkout.setValue(newDate);
+        }
+        checkin.hide();
+        $(endDate)[0].focus();
+    }).data('datepicker');
+    var checkout = $(endDate).datepicker({
+        onRender: function(date) {
+            return ((typeof(disDate) != "undefined") && (date.valueOf() <= checkin.date.valueOf())) ? 'disabled' : '';
+        }
+    }).on('changeDate', function() {
+        checkout.hide();
+    }).data('datepicker');
 }
 
 function _getIdList() {
