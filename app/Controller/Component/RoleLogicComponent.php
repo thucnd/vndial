@@ -89,7 +89,7 @@ class RoleLogicComponent extends Component {
      */
     function checkPermission($role) {
         //Get User ID information
-        $uid = SessionHelper::read('User.uid');
+        $uid = CakeSession::read('User.uid');
         $user = $this->_user->findByUserId($uid);
         //Get permission list
         $permissions = $this->getPermissionParams();
