@@ -104,6 +104,78 @@ function _displayTable(url, clzName, tableHeader, searchItems) {
 }
 
 /**
+ * Get date time
+ * @param {type} dateType
+ * @returns {String}
+ */
+function getDatePicker(dateType) {
+    var today = new Date();
+    var day = today.getDate();
+    var month = today.getMonth() + 1; //January is 0!
+    var year = today.getFullYear();
+    switch (dateType) {
+        case 'today':
+            return {
+                'start' : month + '/' + day + '/' + year
+               ,'end' : month + '/' + day + '/' + year
+            };
+            break;
+        case 'yesterday':
+            var dateEnd = new Date(today.setDate(today.getDate() - 1));
+            if ((day - 1) <= 0) {
+                month = month - 1;
+                if (month == 0) {
+                    month = 12;
+                    year = year - 1;
+                }
+            }
+            return {
+                'start' : month + '/' + dateEnd.getDate() + '/' + year
+               ,'end' : month + '/' + day + '/' + year
+            };
+            break;
+        case 'month':
+            return {
+                'start' : month + '/1/' + year
+               ,'end' : month + '/' + day + '/' + year
+            };
+            break;
+        case 'preMonth':
+            month = month - 1;
+            if(month == 0) {
+                month = 12;
+                year = year - 1;
+            }
+            var lastDateofTheMonth = new Date(year, month, 0);
+            var lastDay = lastDateofTheMonth.getDate();
+            return month + "/" + day + "/" + year;
+            return {
+                'start' : month + '/1/' + year
+               ,'end' : month + "/" + lastDay + "/" + year
+            };
+            break;
+        case 'lastWeek':
+            var dateEnd = new Date(today.setDate(today.getDate()-7));
+            if( (day - 7)<= 0) {
+                month = month - 1;
+                if(month == 0) {
+                    month = 12;
+                    year = year - 1;
+                }
+            }
+            return {
+                'start' : month + "/" + dateEnd.getDate() + "/" + year
+               ,'end' : month + "/" + day + "/" + year
+            };
+            break;
+        default:
+            return {'error': 'invalid'};
+            break;
+    }
+    return {'error': 'invalid'};
+}
+
+/**
  * init datePicker
  * @param {string} startDate
  * @param {string} endDate
@@ -114,8 +186,8 @@ function displayDatePicker(startDate, endDate, disDate) {
     // Set start_time and end_time
     var nowTemp = new Date();
     var now = new Date();
-    if(typeof(disDate) != "undefined"){
-        now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate()-disDate, 0, 0, 0, 0);
+    if (typeof(disDate) != "undefined") {
+        now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate() - disDate, 0, 0, 0, 0);
     }
 
     var checkin = $(startDate).datepicker({
@@ -140,6 +212,10 @@ function displayDatePicker(startDate, endDate, disDate) {
     }).data('datepicker');
 }
 
+/**
+* Get Id list
+
+ * @returns {Array} */
 function _getIdList() {
     var ids = [];
     $('input.child-tickbox').each(function(index, element) {
