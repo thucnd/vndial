@@ -28,6 +28,19 @@ class CallReport extends AppModel {
      * @var string
      */
     public $primaryKey = 'call_report_id';
+    
+    /**
+     * Defination call status
+     * @var type 
+     */
+    public $callStatus = array(
+        'NORMAL_CLEARING'           => 'ANSWER',
+        'USER_BUSY'                 => 'BUSY',
+        'NO_ANSWER'                 => 'NOANSWER',
+        'CALL_REJECTED'             => 'REJECTED',
+        'NORMAL_CIRCUIT_CONGESTION' => 'CONGESTION',
+        'SWITCH_CONGESTION'         => 'CONGESTION'
+    );
 
     /**
      * Database table name for call_report model
