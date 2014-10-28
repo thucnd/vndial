@@ -1,21 +1,14 @@
 <?php
-
 /**
  * GatewayLogicComponent.php
  *
  * Gateway logic
  *
- * $Id: GatewayLogicComponent.php 2013/01/22 khanhle$
+ * $Id: GatewayLogicComponent.php 2013/01/22 thucnd$
  * 
  */
 App::uses('Component', 'Controller');
-
-/**
- * Gateway logic
- *
- */
 class DataTableLogicComponent extends Component {
-
     const _TICK_BOX_ = '<input class="child-tickbox" type="checkbox" name="%s" value=""><span class="lbl"></span>';
     const _EDIT_BOX_ = '
                             <a class="edit btn btn-mini btn-info" href="%s"><i class="icon-edit"></i></a>
@@ -28,20 +21,6 @@ class DataTableLogicComponent extends Component {
                             <a class="edit btn btn-mini btn-info" href="%s"><i class="icon-edit bigger-120"></i></a>
                             <a class="edit btn btn-mini btn-danger" href="%s"><i class="icon-trash bigger-120"></i></a>
                         ';
-    
-    /**
-     * An array containing the class names of models this controller uses.
-     * @var array 
-     */
-    public $uses = array('Recording', 'Tts');
-
-    /**
-     * Component
-     * @var array 
-     */
-    public $components = array('DataTableLogic', 'AppLogic', 'Session', 'CampaignLogic');
-
-
     /**
      * Process data table for each request
      * @param array $params
@@ -76,7 +55,7 @@ class DataTableLogicComponent extends Component {
         $rows = $model->getListByCondition();
 
         $jsonData = array('page' => $page, 'total' => $total, 'rows' => array());
-        $this->_extractRows($jsonData, $rows, $model, $columns);
+        $jsonData = $this->_extractRows($jsonData, $rows, $model, $columns);
 
         return $jsonData;
     }
@@ -88,98 +67,127 @@ class DataTableLogicComponent extends Component {
      * @param collection $model
      * @param array $columns
      */
-    private function _extractRows(&$jsonData, $rows, $model, $columns) {
+    private function _extractRows($jsonData, $rows, $model, $columns) {
         foreach ($rows as $row) {
             //If cell's elements have named keys, they must match column names
             //Only cell's with named keys and matching columns are order independent.
             $cell = array();
-            foreach ($columns as $key => $_value) {
-                if (!strstr($key, 'box')) {
+            foreach ($columns as $key => $column) {
+                if(isset($column['funcBox']) && !is_null($column['funcBox'])) {
+                    $cell[$key] = $this->{'get'.$column['funcBox']}($row, $model);
+                } elseif(isset($column['funcData']) && !is_null($column['funcData'])) {
+                    $cell[$key] = $this->{'get'. $column['funcData']}($row);
+                } else {
                     $cell[$key] = $row[$model->name][$key];
                 }
-            }
-            $cell['tickbox'] = sprintf(self::_TICK_BOX_, $row[$model->name][$model->primaryKey]);
-            
-            // Edit box
-            if (array_key_exists('editbox', $columns)) {
-                $cell['editbox'] = sprintf(self::_EDIT_BOX_, strtolower($model->name) . '/edit/' . $row[$model->name][$model->primaryKey], strtolower($model->name) . '/del/' . $row[$model->name][$model->primaryKey]);
-            }
-            
-            // Campaign box
-            if (array_key_exists('campbox', $columns)) {
-                $cell['campbox'] = sprintf(self::_CAMP_BOX_,
-                        strtolower($model->name) . '/start/' . $row[$model->name][$model->primaryKey],
-                        strtolower($model->name) . '/pause/' . $row[$model->name][$model->primaryKey],
-                        strtolower($model->name) . '/stop/' . $row[$model->name][$model->primaryKey],
-                        strtolower($model->name) . '/edit/' . $row[$model->name][$model->primaryKey],
-                        strtolower($model->name) . '/del/' . $row[$model->name][$model->primaryKey]
-                );
-            }
-
-            // Dispaly user 
-            if (array_key_exists('created_by', $columns)) {
-                $cell['created_by'] = '';
-                $cell['created_by'] = $row['User']['username'];
-            }
-            
-            // Display group for contact management
-            if (array_key_exists('group_id', $columns)) {
-                $cell['group_id'] = '';
-                $cell['group_id'] = $row['ContactGroup']['name'];
-            }
-            
-            // Display Recording
-            if (array_key_exists('recording_id', $columns)) {
-                $cell['recording_id'] = '';
-                $cell['recording_id'] = $row['Recording']['name'];
-            }
-            
-            // Display Campaign status
-            if ($model->name === 'Campaign') {
-                $arrStatus = array(1 => __('START'), 2 => __('PAUSED'), 3 => __('STOP'));
-                $cell['status'] ='';
-                $cell['status'] = $arrStatus[$row[$model->name]['status']];
-                
-                // Display Campaign Type
-                $arrType = array(1 => __('Play audio'), 2 => __('Survey'), 3 => __('Text to speech'));
-                $cell['camp_type_id'] ='';
-                $cell['camp_type_id'] = $arrType[$row[$model->name]['camp_type_id']];
-            }
-            
-            // Display Callrequest
-            if ($model->name === 'CallRequest') {
-                if (array_key_exists('campaign_id', $columns)) {
-                    $cell['campaign_id'] = $row['Campaign']['name'];
-                }
-            }
-            
-            // Display CallReport
-            if ($model->name === 'CallReport') {
-                if (array_key_exists('campaign_id', $columns)) {
-                    $cell['campaign_id'] = $row['Campaign']['name'];
-                }
-            }
-            
+            }  
             // Don't display role as  Supper admin
             if ($model->name == 'Role') {
                 if (isset($row['Role']['role_id']) && $row['Role']['role_id'] == SUPPER_ADMIN) {
                     continue;
                 }
             }
-            
-            //Display gateway and Role on user
-            if ($model->name == 'User') {
-                $cell['gateway_id'] = $row['Gateway']['name'];
-                $cell['role'] = $row['Role']['role_name'];
-            }
-
             $entry = array('id' => $row[$model->name][$model->primaryKey],
                 'cell' => $cell,
             );
             $jsonData['rows'][] = $entry;
         }
+        return $jsonData;
+    }    
+    /**
+     * Display Check Box
+     * @param type $model
+     * @return string
+     */
+    private function getTickBox($row, $model) {
+        return sprintf(self::_TICK_BOX_, $row[$model->name][$model->primaryKey]);
+    }    
+    /**
+     * Display Edit box
+     * @param type $model
+     * @return string
+     */
+    private function getEditBox($row, $model) {
+        return sprintf(self::_EDIT_BOX_, strtolower($model->name) . '/edit/' . $row[$model->name][$model->primaryKey], strtolower($model->name) . '/del/' . $row[$model->name][$model->primaryKey]);
+    }    
+    /**
+     * Display Campaign Box
+     * @param type $model
+     * @return string
+     */
+    private function getCampBox($row, $model) {
+        return sprintf(self::_CAMP_BOX_,
+                        strtolower($model->name) . '/start/' . $row[$model->name][$model->primaryKey],
+                        strtolower($model->name) . '/pause/' . $row[$model->name][$model->primaryKey],
+                        strtolower($model->name) . '/stop/' . $row[$model->name][$model->primaryKey],
+                        strtolower($model->name) . '/edit/' . $row[$model->name][$model->primaryKey],
+                        strtolower($model->name) . '/del/' . $row[$model->name][$model->primaryKey]
+                );
+    }    
+    /**
+     * Display Created By
+     * @param type $row
+     * @return string
+     */
+    private function getCreatedBy($row) {
+        return $row['User']['username'];
+    }    
+    /**
+     * Get Contact Group Name
+     * @param type $row
+     * @return type
+     */
+    private function getGroupName($row){
+        return $row['ContactGroup']['name'];
     }
-
+    /**
+     * Get Recording Name
+     * @param type $row
+     * @return string
+     */
+    private function getRecordingName($row){
+        return $row['Recording']['name'];
+    }    
+    /**
+     * Get Campaign Name
+     * @param type $row
+     * @return string
+     */
+    private function getCampaignName($row){
+        return $row['Campaign']['name'];
+    }
+    /**
+     * Get Gateway Name
+     * @param type $row
+     * @return string
+     */
+    private function getGatewayName($row){
+        return $row['Gateway']['name'];
+    }
+    /**
+     * Get Role Name
+     * @param type $row
+     * @return string
+     */
+    private function getRoleName($row){
+        return $row['Role']['role_name'];
+    }
+    /**
+     * Display Status
+     * @param type $row
+     * @return string
+     */
+    private function getStatus($row){  
+        App::uses('CampaignStatus', 'Model');
+        return CampaignStatus::$fields[$row['Campaign']['status']];
+    }
+    /**
+     * Display Campaign Type
+     * @param type $row
+     */
+    private function getCampaignType($row){
+        App::uses('CampaignType', 'Model');
+        return CampaignType::$fields[$row['Campaign']['camp_type_id']];
+    }
 }
-
 ?>

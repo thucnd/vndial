@@ -1,5 +1,4 @@
 <?php
-
 /**
  * SurveyController.php
  *
@@ -11,17 +10,11 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * Survey Controller
- *
- */
 class SurveyController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
     const _SURVEY_TARGET_ADD_ = 'add';
     const _SURVEY_TARGET_EDIT_ = 'edit';
-
     public $layout = 'frontend';
     public $name = 'survey';
     public $javascripts = array('survey');
@@ -46,19 +39,19 @@ class SurveyController extends AppController {
         setcookie("s", null);
         setcookie("e", null);
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getSurveyString();
+        $this->columns = $this->Survey->_getSurveyString();
         $this->defaultSort = 'question';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
-
         return parent::beforeFilter();
     }
 
-    public function index() {
-        
+    public function index() {        
     }
 
+    /**
+     * Create new Survey
+     */
     public function add() {
         $recordings = $this->AppLogic->getAllData($this->Recording);
         $this->set('recordings', $recordings);
@@ -67,7 +60,6 @@ class SurveyController extends AppController {
     /*
      * Edit Survey Information
      */
-
     public function edit($id = null) {
         $survey = $this->Survey->findBySurveyId($id);
         $recordings = $this->AppLogic->getAllData($this->Recording);
@@ -80,7 +72,6 @@ class SurveyController extends AppController {
     /*
      * Update into database
      */
-
     public function save() {
         $this->layout = false;
         $ret = false;
@@ -139,6 +130,9 @@ class SurveyController extends AppController {
         $this->render('exec');
     }
 
+    /**
+     * Update information
+     */
     public function update() {
         $this->layout = false;
         $ret = false;
@@ -164,11 +158,11 @@ class SurveyController extends AppController {
      */
     public function exec() {
         $this->layout = false;
+        $status = STATUS_NG;
         if (isset($this->request->data['header']) &&
                 $this->request->data['header'] === SurveyController::_HEADER_) {
-            $status = 1;
+            $status = STATUS_OK;
         }
-
         $this->set('list', null);
         $this->set('status', STATUS_OK);
         $this->set('errors', null);
@@ -205,24 +199,6 @@ class SurveyController extends AppController {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
                 $this->request->data, $this->Survey, $this->columns);
-
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in gateway controller
-     * @return array
-     */
-    private function _getSurveyString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => LEFT_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 100, 'align' => CENTER_ALIGNMENT),
-            'question' => array('name' => __('Question'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'description' => array('name' => __('Description'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'recording_id' => array('name' => __('Recording'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'created_by' => array('name' => __('Created By'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

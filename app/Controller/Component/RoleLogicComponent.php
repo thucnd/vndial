@@ -11,7 +11,6 @@ App::uses('SessionHelper', 'View/Helper');
 App::import('Model', 'User');
 
 class RoleLogicComponent extends Component {
-
     public $components = array('RequestHandler', 'Session');
     public $_roleModel;
     public $_controller;
@@ -90,7 +89,7 @@ class RoleLogicComponent extends Component {
      */
     function checkPermission($role) {
         //Get User ID information
-        $uid = SessionHelper::read('User.uid');
+        $uid = CakeSession::read('User.uid');
         $user = $this->_user->findByUserId($uid);
         //Get permission list
         $permissions = $this->getPermissionParams();

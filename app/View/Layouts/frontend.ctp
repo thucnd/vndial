@@ -16,11 +16,11 @@
             'bootstrap-responsive',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
-            'google-code-prettify/prettify',
             'menu',
             'common',
             'frontend',
-            'table'
+            'table',
+            'jquery.jqplot.min'
             ));
 
         for ($i = 0; $i < count($csss); $i++):
@@ -28,7 +28,7 @@
         endfor;
 
         echo $this->Html->script(array(
-            'jquery-1.7.2.min',
+            'jquery-1.8.2.min',
             'flexigrid',
             'common',
             'jquery.validate.min',
@@ -47,7 +47,6 @@
             'bootstrap-typeahead',
             'bootstrap-datepicker',
             'bootstrap-timepicker',
-            'google-code-prettify/prettify',
             'bootstrap-paginator',
             'bTable',
             'colResizable-1.3.min'

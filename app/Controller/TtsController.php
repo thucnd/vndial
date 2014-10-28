@@ -1,5 +1,4 @@
 <?php
-
 /**
  * TtsController.php
  *
@@ -11,10 +10,6 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * Tts Controller
- *
- */
 class TtsController extends AppController {
 
     const _HEADER_ = 'header';
@@ -42,19 +37,19 @@ class TtsController extends AppController {
     function beforeFilter() {
         $this->pageTitle = __('Text to speech');
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getTtsString();
+        $this->columns = $this->Tts->_getTtsString();
         $this->defaultSort = 'name';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
-
         return parent::beforeFilter();
     }
 
-    public function index() {
-        
+    public function index() {        
     }
 
+    /**
+     * Add new TTS
+     */
     public function add() {
         $countries = $this->Country->find('all');
         $this->set('countries', $countries);
@@ -76,7 +71,6 @@ class TtsController extends AppController {
     /*
      * Update into database
      */
-
     public function save() {
         $this->layout = false;
         $ret = false;
@@ -104,6 +98,9 @@ class TtsController extends AppController {
         $this->render('exec');
     }
 
+    /**
+     *  Get Header information
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
@@ -174,24 +171,6 @@ class TtsController extends AppController {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
                 $this->request->data, $this->Tts, $this->columns);
-
-
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in Tts controller
-     * @return array
-     */
-    private function _getTtsString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'name' => array('name' => __('Name'), 'width' => 150, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'text_data' => array('name' => __('Data'), 'width' => 150, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'language' => array('name' => __('Language'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'created_date' => array('name' => __('Created Date'), 'width' => 120, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

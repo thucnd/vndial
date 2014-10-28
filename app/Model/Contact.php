@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ContactModel.php
  *
@@ -83,6 +82,24 @@ class Contact extends AppModel {
     public function getContactListByCondition() {
         return $this->getListByCondition();
     }
+    
+    /**
+     * List of key-value to be displayed in gateway controller
+     * @return array
+     */
+    public function _getContactString() {
+        return array(
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'TickBox'),
+            'editbox' => array('name' => __('Operations'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'EditBox'),
+            'group_id' => array('name' => __('Group name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE, 'funcData' => 'GroupName'),
+            'first_name' => array('name' => __('First Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'last_name' => array('name' => __('Last Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'company' => array('name' => __('Company'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'address' => array('name' => __('Address'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'phone' => array('name' => __('Phone'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'email' => array('name' => __('Email'), 'width' => 155, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
+        );
+    }
 }
-
 ?>

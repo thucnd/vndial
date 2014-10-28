@@ -1,5 +1,4 @@
 <?php
-
 /**
  * CallRequestController.php
  *
@@ -11,15 +10,9 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * CallRequest Controller
- *
- */
 class CallRequestController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
-
     public $layout = 'frontend';
     public $name = 'call_request';
     public $javascripts = array();
@@ -44,23 +37,22 @@ class CallRequestController extends AppController {
         setcookie("s", null);
         setcookie("e", null);
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getCallRequestString();
+        $this->columns = $this->CallRequest->_getCallRequestString();
         $this->defaultSort = 'caller';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
-
         return parent::beforeFilter();
     }
 
     public function index() {
-        
     }
 
     public function add() {
-        
     }
 
+    /**
+     * Get Header information
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
@@ -74,6 +66,9 @@ class CallRequestController extends AppController {
         $this->set('message', MESSAGE_OK);
     }
 
+    /**
+     * Delete call request
+     */
     public function delete() {
         $this->layout = false;
         $ids = $this->request->data['ids'];
@@ -100,29 +95,7 @@ class CallRequestController extends AppController {
     public function process() {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
-                $this->request->data, $this->CallRequest, $this->columns);
-        
-        
+                $this->request->data, $this->CallRequest, $this->columns);       
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in gateway controller
-     * @return array
-     */
-    private function _getCallRequestString() {
-        return array(
-            'call_request_id' => array('name' => __('ID'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'campaign_id' => array('name' => __('Campaign'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'caller' => array('name' => __('Caller'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'called' => array('name' => __('Called'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'status' => array('name' => __('Status'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'retries' => array('name' => __('Retries'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'start_time' => array('name' => __('Start Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'end_time' => array('name' => __('End Time'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'hangup' => array('name' => __('Hangup'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

@@ -32,15 +32,14 @@ class UserController extends AppController {
     function beforeFilter() {
         $this->pageTitle = __('Users');
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getUserString();
+        $this->columns = $this->User->_getUserString();
         $this->defaultSort = 'username';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
         $this->set('tblHeader', $this->columns);
         return parent::beforeFilter();
     }
 
-    public function index() {      
+    public function index() {    
     }    
     
     /*
@@ -235,13 +234,15 @@ class UserController extends AppController {
         $this->render('exec');
     }
 
+    /**
+     * Get Information
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
                 $this->request->data['header'] === UserController::_HEADER_) {
             $status = 1;
         }
-
         $this->set('list', null);
         $this->set('status', STATUS_OK);
         $this->set('errors', null);
@@ -255,26 +256,6 @@ class UserController extends AppController {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
                 $this->request->data, $this->User, $this->columns);
-
-
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in User controller
-     * @return array
-     */
-    private function _getUserString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT),
-            'username' => array('name' => __('Name'), 'width' => 200, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'role' => array('name' => __('Role'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'gateway_id' => array('name' => __('Gateway'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-    
-    
-
 }

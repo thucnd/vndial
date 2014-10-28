@@ -9,6 +9,9 @@
  * 
  */
 class CampaignType extends AppModel {
+    const PLAY_AUDIO = 1;
+    const SURVEY = 2;
+    const TEXT_TO_SPEECH = 3;
 
     /**
      * Alias for Campaign Type model
@@ -43,6 +46,16 @@ class CampaignType extends AppModel {
     public $order = array(
         'CampaignType.campaign_type_id ASC',
         'CampaignType.name ASC'
+    );
+    
+    /**
+     * Campaign Type
+     * @var string 
+     */
+    static $fields = array(
+         self::PLAY_AUDIO => 'Play audio'
+        ,self::SURVEY => 'Survey'
+        ,self::TEXT_TO_SPEECH => 'Text to speech'
     );
 
     /**

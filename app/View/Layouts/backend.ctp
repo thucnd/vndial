@@ -23,8 +23,7 @@
         endfor;
 
         echo $this->Html->script(array(
-            'jquery-1.7.2.min',
-          //  'flexigrid',
+            'jquery-1.8.2.min',
             'common',
             'bootstrap-transition',
             'bootstrap-alert',

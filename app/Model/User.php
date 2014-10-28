@@ -122,6 +122,21 @@ class User extends AppModel {
     public function getUserListByCondition() {
         return $this->getListByCondition();
     }
+    
+    /**
+     * Get User information
+     * @return type
+     */
+    public function _getUserString() {
+        return array(
+            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'TickBox'),
+            'editbox' => array('name' => __('Operations'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'funcBox' => 'EditBox'),
+            'username' => array('name' => __('Name'), 'width' => 200, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
+            'role' => array('name' => __('Role'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE, 'funcData' =>'RoleName'),
+            'gateway_id' => array('name' => __('Gateway'), 'width' => 50, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE, 'funcData' => 'GatewayName'),
+            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE)
+        );
+    }
 
 }
 

@@ -1,5 +1,4 @@
 <?php
-
 /**
  * ContactController.php
  *
@@ -12,15 +11,9 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * Contact Controller
- *
- */
 class ContactController extends AppController {
-
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
-
     public $layout = 'frontend';
     public $name = 'contact';
     public $javascripts = array('contact');
@@ -45,8 +38,7 @@ class ContactController extends AppController {
         setcookie("s", null);
         setcookie("e", null);
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
-        $this->columns = $this->_getContactString();
+        $this->columns = $this->Contact->_getContactString();
         $this->defaultSort = 'first_name';
         $this->defaultWidth = ContactController::_DEFAULT_WIDTH_;
 
@@ -65,6 +57,9 @@ class ContactController extends AppController {
         $this->set('groups', $list);
     }
 
+    /**
+     * Get Header information
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
@@ -136,29 +131,7 @@ class ContactController extends AppController {
     public function process() {
         $this->layout = false;
         $jsonData = $this->DataTableLogic->processDataTable(
-                $this->request->data, $this->Contact, $this->columns);
-        
-        
+                $this->request->data, $this->Contact, $this->columns);       
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in gateway controller
-     * @return array
-     */
-    private function _getContactString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 80, 'align' => CENTER_ALIGNMENT),
-            'group_id' => array('name' => __('Group name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'first_name' => array('name' => __('First Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'last_name' => array('name' => __('Last Name'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'company' => array('name' => __('Company'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'address' => array('name' => __('Address'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'phone' => array('name' => __('Phone'), 'width' => 80, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'email' => array('name' => __('Email'), 'width' => 155, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE)
-        );
-    }
-
 }

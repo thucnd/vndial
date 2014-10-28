@@ -1,5 +1,4 @@
 <?php
-
 /**
  * GatewayController.php
  *
@@ -11,15 +10,10 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 
-/**
- * Gateway Controller
- *
- */
 class GatewayController extends AppController {
 
     const _HEADER_ = 'header';
     const _DEFAULT_WIDTH_ = '100%';
-
     public $layout = 'backend';
     public $name = 'gateway';
     public $javascripts = array('gateway');
@@ -39,31 +33,26 @@ class GatewayController extends AppController {
      */
     public $components = array('DataTableLogic', 'AppLogic','Session');
 
-    function beforeFilter() {
-        
+    function beforeFilter() {        
         $this->pageTitle = $this->Gateway->name;
         setcookie("s", null);
         setcookie("e", null);
         $this->request->data = Sanitize::clean($this->request->data, array('encode' => false));
-
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
-        $this->columns = $this->_getGatewayString();
+        $this->columns = $this->Gateway->_getGatewayString();
         $this->defaultSort = 'name';
         $this->defaultWidth = self::_DEFAULT_WIDTH_;
-
         $this->set('tblHeader', $this->columns);
         return parent::beforeFilter();
     }
 
     public function index() {
-
     }
 
     /*
      *  Create new Gateway
      */
-    public function add() {
-        
+    public function add() {        
     }
     
     /*
@@ -76,13 +65,15 @@ class GatewayController extends AppController {
         $this->set('gateway',$Gateway);
     }
 
+    /**
+     * Get Header
+     */
     public function exec() {
         $this->layout = false;
         if (isset($this->request->data['header']) &&
                 $this->request->data['header'] === GatewayController::_HEADER_) {
             $status = 1;
-        }
-        
+        }        
         $this->set('list', null);
         $this->set('status', STATUS_OK);
         $this->set('errors', null);
@@ -148,23 +139,4 @@ class GatewayController extends AppController {
         
         $this->set(compact('jsonData'));
     }
-
-    /**
-     * List of key-value to be displayed in gateway controller
-     * @return array
-     */
-    private function _getGatewayString() {
-        return array(
-            'tickbox' => array('name' => CHECK_BOX, 'width' => 25, 'align' => CENTER_ALIGNMENT),
-            'editbox' => array('name' => __('Operations'), 'width' => 60, 'align' => CENTER_ALIGNMENT),
-            'name' => array('name' => __('Name'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'gateways' => array('name' => __('Gateways'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'gateway_codecs' => array('name' => __('Gateway Codecs'), 'width' => 100, 'align' => CENTER_ALIGNMENT, 'sorting' => TRUE),
-            'gateway_timeouts' => array('name' => __('Gateway Timeouts'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'gateway_retries' => array('name' => __('Gateway Retries'), 'width' => 50, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),            
-            'created_date' => array('name' => __('Created Date'), 'width' => 100, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-            'created_by' => array('name' => __('Created By'), 'width' => 80, 'align' => LEFT_ALIGNMENT, 'sorting' => TRUE),
-       );
-    }
-
 }

@@ -11,6 +11,7 @@ class CallRequestComponent extends Component {
 
     public $_recording;
     public $_tts;
+    public $_callReport;
     public $_controller;
     private $_DATABASE_CONFIG = array();
 
@@ -28,6 +29,9 @@ class CallRequestComponent extends Component {
 
         App::import('Model', 'Tts');
         $this->_tts = new Tts;
+        
+        App::import('Model', 'CallReport');
+        $this->_callReport = new CallReport;
 
         // Load database connection
         App::uses('ConnectionManager', 'Model');
@@ -461,6 +465,47 @@ class CallRequestComponent extends Component {
             return 'NULL';
         }
         return 'NULL';
+    }
+    
+    /**
+     * Get Report by date time
+     * @param type $params
+     * @return type
+     */
+    function searchReportByDateTime($params){       
+        $data = array(
+            'ANSWER'        => 0,
+            'BUSY'          => 0,
+            'NOANSWER'      => 0,
+            'REJECTED'      => 0,
+            'CONGESTION'    => 0,
+            'OTHER'          => 0
+        );
+        try {
+            $sql = "
+                SELECT
+                    hangupcause as hangupcause, count(*) as Count
+                FROM call_reports
+                WHERE
+                    user_id = " . $params['uid']
+                    ." AND  created_date BETWEEN  '" . $params['start_at'] . "'  AND '" . $params['stop_at'] . "' 
+                GROUP BY hangupcause
+                "
+            ;           
+            $list = $this->_callReport->query($sql);
+            if(count($list) > 0) {
+                foreach ($list as $key => $report) {
+                    if(array_key_exists($report['call_reports']['hangupcause'], $this->_callReport->callStatus)){
+                        $data[$this->_callReport->callStatus[$report['call_reports']['hangupcause']]] += intval($report[0]['Count']);
+                    } else {
+                        $data['OTHER'] +=  intval($report[0]['Count']);
+                    }
+                }
+            }
+        } catch (Exception $exc) {
+            $this->log('Error code:' . $exc->getTraceAsString());
+        }
+        return $data;
     }
 
 }
